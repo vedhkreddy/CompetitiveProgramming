@@ -1,11 +1,11 @@
 #include <iostream>
 #include <fstream>
-#include <vector>
 #include <cmath>
 #include <algorithm>
 using namespace std;
 
 int main(){
+    //http://usaco.org/index.php?page=viewproblem2&cpid=663
     ifstream fin("square.in");
     ofstream fout("square.out");
     pair<pair<int, int>, pair<int, int>> first;
