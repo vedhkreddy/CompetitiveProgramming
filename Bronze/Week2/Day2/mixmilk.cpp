@@ -12,9 +12,7 @@ int main(){
     pair<int, int> second = make_pair(c, d);
     pair<int, int> third = make_pair(e, f);
     pair<int, int> pour = make_pair(1, 2);
-    cout << a << b << c << d << e << f;
     for(int i = 0; i < 100; i++){
-        cout << "gothere";
         if(pour.first == 1){
             if (first.second + second.second <= second.first){
                 second.second += first.second;
