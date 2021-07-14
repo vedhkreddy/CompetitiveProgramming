@@ -7,13 +7,13 @@ using namespace std;
 int positions[1000];
 
 int tally(int curpositions[1000]){
-    int count = 0;
+    int tallycount = 0;
     for(int i = 0; i < 1000; i++){
         if (curpositions[i] > 0){
-            count++;
+            tallycount++;
         }
     }
-    return count;
+    return tallycount;
 }
 
 int main(){
