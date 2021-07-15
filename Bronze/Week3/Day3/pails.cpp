@@ -4,6 +4,7 @@
 using namespace std;
 
 int main(){
+    //http://usaco.org/index.php?page=viewproblem2&cpid=615
     ifstream fin("pails.in");
     ofstream fout("pails.out");
     int x, y, m;
