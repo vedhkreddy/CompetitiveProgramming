@@ -6,11 +6,11 @@
 using namespace std;
 
 bool checkCell(char i, char j, char cell){
-    bool b = (i == cell || j == cell);
     return i == cell || j == cell;
 }
 
 int main(){
+    //http://usaco.org/index.php?page=viewproblem2&cpid=831
     ifstream fin("tttt.in");
     ofstream fout("tttt.out");
     vector<vector<char>> board;;
@@ -21,27 +21,25 @@ int main(){
             fin >> a;
             board[i].push_back(a);
         }
-        cout << endl;
     }
-    int singlecount = 0;
-    int doublecount = 0;
+    set<char> singlecount;
+    set<pair<char, char>> doublecount;
 
     for(char i = 'A'; i <= 'Z'; i++){
         for(int j = 0; j < 3; j++){
             if (board[j][0] == i && board[j][1] == i && board[j][2] == i){
-                singlecount++;
+                singlecount.insert(i);
             }
-            else if(board[0][j] == i && board[1][j] == i && board[2][j] == i){
-                singlecount++;
+            if(board[0][j] == i && board[1][j] == i && board[2][j] == i){
+                singlecount.insert(i);
             }
         }
         if (board[0][0] == i && board[1][1] == i && board[2][2] == i){
-            singlecount++;
+            singlecount.insert(i);
         }
-        else if (board[0][2] == i && board[1][1] == i && board[2][0] == i){
-            singlecount++;
+        if (board[0][2] == i && board[1][1] == i && board[2][0] == i){
+            singlecount.insert(i);
         }
-        else{}
     }
 
     for(char i = 'A'; i <= 'Z'; i++){
@@ -51,34 +49,38 @@ int main(){
                     if (board[k][0] == board[k][1] && board[k][1] == board[k][2]) {
                     }
                     else{
-                        doublecount++;
+                        doublecount.insert(make_pair(i, j));
+                        cout << i << " " << j << 1 << endl;
                     }
                 }
-                else if(checkCell(i, j, board[0][k]) == 1 && checkCell(i, j, board[1][k]) == 1 && checkCell(i, j, board[2][k]) == 1){
+                if(checkCell(i, j, board[0][k]) == 1 && checkCell(i, j, board[1][k]) == 1 && checkCell(i, j, board[2][k]) == 1){
                     if (board[0][k] == board[1][k] && board[1][k] == board[2][k]) {
                     }
                     else{
-                        doublecount++;
+                        doublecount.insert(make_pair(i, j));
+                        cout << i << " " << j << 2 << endl;
                     }
                 }
             }
-            if (checkCell(i, j, board[0][0]) == 1 && checkCell(i, j, board[1][1]) == 1 && checkCell(i, j, board[1][1]) == 1){
+            if (checkCell(i, j, board[0][0]) == 1 && checkCell(i, j, board[1][1]) == 1 && checkCell(i, j, board[2][2]) == 1){
                 if (board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
                 }
                 else{
-                    doublecount++;
+                    doublecount.insert(make_pair(i, j));
+                    cout << i << " " << j << 3 << endl;
                 }
             }
             else if (checkCell(i, j, board[0][2]) == 1 && checkCell(i, j, board[1][1]) == 1 && checkCell(i, j, board[2][0]) == 1){
                 if (board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
                 }
                 else{
-                    doublecount++;
+                    doublecount.insert(make_pair(i, j));
+                    cout << i << " " << j << 4 << endl;
                 }
             }
             else{}
             }
     }
 
-    fout << singlecount << endl << doublecount << endl;
+    fout << singlecount.size() << endl << doublecount.size() << endl;
 }
