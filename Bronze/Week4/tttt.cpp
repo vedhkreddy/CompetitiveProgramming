@@ -50,7 +50,6 @@ int main(){
                     }
                     else{
                         doublecount.insert(make_pair(i, j));
-                        cout << i << " " << j << 1 << endl;
                     }
                 }
                 if(checkCell(i, j, board[0][k]) == 1 && checkCell(i, j, board[1][k]) == 1 && checkCell(i, j, board[2][k]) == 1){
@@ -58,7 +57,6 @@ int main(){
                     }
                     else{
                         doublecount.insert(make_pair(i, j));
-                        cout << i << " " << j << 2 << endl;
                     }
                 }
             }
@@ -67,7 +65,6 @@ int main(){
                 }
                 else{
                     doublecount.insert(make_pair(i, j));
-                    cout << i << " " << j << 3 << endl;
                 }
             }
             else if (checkCell(i, j, board[0][2]) == 1 && checkCell(i, j, board[1][1]) == 1 && checkCell(i, j, board[2][0]) == 1){
@@ -75,7 +72,6 @@ int main(){
                 }
                 else{
                     doublecount.insert(make_pair(i, j));
-                    cout << i << " " << j << 4 << endl;
                 }
             }
             else{}
