@@ -13,7 +13,7 @@ int main(){
     //http://usaco.org/index.php?page=viewproblem2&cpid=831
     ifstream fin("tttt.in");
     ofstream fout("tttt.out");
-    vector<vector<char>> board;;
+    vector<vector<char>> board;
     for(int i = 0; i < 3; i++){
         board.push_back({});
         for(int j = 0; j < 3; j++){

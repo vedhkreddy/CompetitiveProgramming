@@ -9,3 +9,8 @@
 
 #ignore .DS_Store
 .DS_Store
+
+#ignore .VSCODE
+.vscode/*
+
+#
