@@ -11,7 +11,6 @@ int main(){
     int places[N];
     for(int i = 0; i < N; i++){
         fin >> places[i];
-        cout << places[i] << endl;
     }
     double smallcount = 5e10;
     for(int i = 0; i < N; i++){
@@ -25,7 +24,6 @@ int main(){
                 count += places[j] * away;
                 away++;  
             }
-            cout << "gothere";
         }
         else{
             for(int j = 0; j < N; j++){
