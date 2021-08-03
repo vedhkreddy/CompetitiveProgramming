@@ -2,7 +2,7 @@
 #include <fstream>
 using namespace std;
 
-void solve(int N, auto log){
+void solve(int N, int log[]){
     ifstream fin("taming.in");
     ofstream fout("taming.out");
     bool bad = false;
