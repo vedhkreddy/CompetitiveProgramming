@@ -2,12 +2,14 @@
 #include <fstream>
 #include <algorithm>
 #include <vector>
+#include <set>
 using namespace std;
 
-int solve(pair<int, int> cows[], int N, int B){
+int solve(pair<int, int> cows[], int N, int B, set<int> xvalues, set<int> yvalues){
     int min = 1000;
-    for(int a = 0; a < B; a++){
-        for(int b = 0; b < B; b++){
+
+    for(int a : xvalues){
+        for(int b : yvalues){
             int quadrant1 = 0, quadrant2 = 0, quadrant3 = 0, quadrant4 = 0;
             for(int i = 0; i < N; i++){
                 if (cows[i].first > a && cows[i].second > b){
@@ -28,9 +30,7 @@ int solve(pair<int, int> cows[], int N, int B){
             if (max < min){
                 min = max;
             }
-            b++;
         }
-        a++;
     }
     return min;
 }
@@ -42,11 +42,16 @@ int main(){
     int N, B;
     fin >> N >> B;
     pair<int, int> cows[N];
+    set<int> xvalues;
+    set<int> yvalues;
     for(int i = 0; i < N; i++){
         int x, y;
         fin >> x >> y;
         cows[i] = make_pair(x, y);
+        xvalues.insert(x-1);
+        yvalues.insert(y-1);
     }
-    int solution = solve(cows, N, B);
+    
+    int solution = solve(cows, N, B, xvalues, yvalues);
     fout << solution;
 }
