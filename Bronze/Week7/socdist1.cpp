@@ -4,9 +4,10 @@
 using namespace std;
 
 int solve(int N, int stalls[]){
-    int big1 = 0;
-    int big2 = 0;
+    int big = 0;
+    int bigstart = 0;
     for(int i = 0; i < N; i++){
+        int tmp = i;
         int count = 0;
         if (stalls[i] == 0){
             int indexposition = i;
@@ -16,18 +17,24 @@ int solve(int N, int stalls[]){
             }
             i = indexposition - 1;
         }
-        if (count > big1){
-            big2 = big1;
-            big1 = count;
-        }
-        else if(count > big2){
-            big2 = count;
+        if (count > big){
+            big = count;
+            bigstart = tmp;
         }
     }
-    if (ceil(float(big1) / 4) > ceil(float(big2) / 2)){
-        return ceil(float(big1) / 4);
+    if (bigstart == 0){
+        stalls[0] = 1;
+        return big;
     }
-    return ceil(float(big2) / 2);
+    else if(bigstart + big == N){
+        stalls[N-1] = 1;
+        return big;
+    }
+    else{
+        stalls[int(bigstart + floor(float(big) / 2))] = 1;
+        return ceil(float(big) / 2);
+    }
+
 }
 
 int main(){
@@ -44,5 +51,6 @@ int main(){
     }
 
     int solution = solve(N, stalls);
+    solution = solve(N, stalls);
     fout << solution;
 }
