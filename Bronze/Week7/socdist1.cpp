@@ -5,7 +5,7 @@ using namespace std;
 
 int solve(int N, int stalls[]){
     bool stop = false;
-    bool second = false;
+    bool already_placed_first = false;
     restart:
     int big1 = 0;
     int big2 = 0;
@@ -64,7 +64,7 @@ int solve(int N, int stalls[]){
         //stop is a boolean tracking whether we go around once more to place the second cow or not
         //second is a boolean that makes the next round go into a specific case
         if (stop == false){
-            second = true;
+            already_placed_first = true;
             stop = true;
             goto restart;
         }
@@ -77,7 +77,7 @@ int solve(int N, int stalls[]){
     else if(float(big1) / 2 < endzeros){
         stalls[N-1] = 1;
         if (stop == false){
-            second = true;
+            already_placed_first = true;
             stop = true;
             goto restart;
         }
@@ -88,7 +88,7 @@ int solve(int N, int stalls[]){
     }
     else{
          //if only placing 1, we place it in the biggest account for min
-        if (second == true){
+        if (already_placed_first == true){
             //if odd it is same as next even number
             if (big1 % 2 == 1){
                 big1++;
