@@ -120,6 +120,7 @@ int solve(int N, int stalls[]){
 }
 
 int main(){
+    //http://usaco.org/index.php?page=viewproblem2&cpid=1035
     ifstream fin("socdist1.in");
     ofstream fout("socdist1.out"); 
     int N;
