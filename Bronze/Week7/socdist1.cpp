@@ -4,8 +4,13 @@
 using namespace std;
 
 int solve(int N, int stalls[]){
-    int big = 0;
-    int bigstart = 0;
+    bool stop = false;
+    bool second = false;
+    restart:
+    int big1 = 0;
+    int big2 = 0;
+    int min = 100001;       //one greater than max size of string
+    //find largest two holes of zeros and the min hole of zero
     for(int i = 0; i < N; i++){
         int tmp = i;
         int count = 0;
@@ -17,24 +22,104 @@ int solve(int N, int stalls[]){
             }
             i = indexposition - 1;
         }
-        if (count > big){
-            big = count;
-            bigstart = tmp;
+        if (count > big1){
+            big2 = big1;
+            big1 = count;
+
+        }
+        else if(count > big2){
+            big2 = count;
+        }
+        //holes in beginning and end don't count for min
+        if (count < min && count != 0 && tmp != 0 && tmp != N-1){
+            min = count;
         }
     }
-    if (bigstart == 0){
-        stalls[0] = 1;
-        return big;
+    //zeros at start and end are special cases
+    //find how many zeros there are at the start
+    int startzeros = 0;
+    if (stalls[0] == 0){
+        int indexposition = 0;
+        while (stalls[indexposition] == 0 && indexposition != N){
+            startzeros++;
+            indexposition++;
+        }
     }
-    else if(bigstart + big == N){
+    //find how many zeros at end
+    int endzeros = 0;
+    if (stalls[N-1] == 0){
+        int indexposition = N - 1;
+        while (stalls[indexposition] == 0 && indexposition != -1){
+            endzeros++;
+            indexposition--;
+        }
+    }
+    /*
+    if starting zeros are greater than the max / 2 
+    (that's what the max will be when insert a cow into the middle of the big string of zeros), 
+    we can insert the cow at the first position giving us all instead of half space after it
+    */
+    if (float(big1) / 2 < startzeros){
+        stalls[0] = 1;
+        //stop is a boolean tracking whether we go around once more to place the second cow or not
+        //second is a boolean that makes the next round go into a specific case
+        if (stop == false){
+            second = true;
+            stop = true;
+            goto restart;
+        }
+        if (big1 > min + 1){
+            return min + 1;
+        }
+        return big1;
+    }
+    //same thing as above except with end zeros
+    else if(float(big1) / 2 < endzeros){
         stalls[N-1] = 1;
-        return big;
+        if (stop == false){
+            second = true;
+            stop = true;
+            goto restart;
+        }
+        if (big1 > min + 1){
+            return min + 1;
+        }
+        return big1;
     }
     else{
-        stalls[int(bigstart + floor(float(big) / 2))] = 1;
-        return ceil(float(big) / 2);
+         //if only placing 1, we place it in the biggest account for min
+        if (second == true){
+            //if odd it is same as next even number
+            if (big1 % 2 == 1){
+                big1++;
+            }
+            int newbigsize = (big1/2) - 1;
+            if (min < newbigsize){
+                return min + 1;
+            }
+            return newbigsize + 1;
+        }                                                                                                                                                                                                
+        //if we can place both in the biggest string optimally, do it
+        if (floor(float(big1) / 2) > big2){
+            cout << big1;
+            return ceil(float(big1) / 3);
+        }
+        //if not
+        else{
+            //place the cows in largest and second largest account for the min
+            //we only care about big2 here because we want minimum, the first cow will go in big1
+            
+            //if odd it is same as next even number
+            if (big2 % 2 == 1){
+                big2++;
+            }
+            int newbigsize = (big2/2) - 1;
+            if (newbigsize > min){
+                return min + 1;
+            }
+            return newbigsize + 1;
+        }
     }
-
 }
 
 int main(){
@@ -49,8 +134,6 @@ int main(){
         int b = int(a) - 48;
         stalls[i] = b;
     }
-
     int solution = solve(N, stalls);
-    solution = solve(N, stalls);
     fout << solution;
 }
