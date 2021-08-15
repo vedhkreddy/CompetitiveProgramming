@@ -1,0 +1,54 @@
+Read input into a vector
+//find outofplace
+bessieheight = 0;
+bessieposition = 0;
+for i = 0 .... N-1:
+    if i == 0:
+        if cows[i + 1] < cows[i]:
+            bessieposition = i
+            bessieheight = cows[i]
+    else if i == N - 1:
+        if cows[N - 2] > cows[N - 1]:
+            bessieposition = i
+            bessieheight = cows[i] 
+    else if (cows[i - 1] > cows[i] and cows[i + 1] > cows[i]) || (cows[i - 1] < cows[i] and cows[i + 1] < cows[i] :
+        bessieposition = i
+        bessieheight = cows[i]
+counter = 0;
+left = false;
+
+right = false;
+if bessieposition == N-1:
+    left = true
+else if bessieposition = 0
+    right = true
+else if bessieheight < cows[bessieposition - 1]:
+    left = true;
+else:
+    right = true;
+index = bessieposition;
+last = 100000000;
+while true:
+    if left == true:
+        if index == 0:
+            return counter
+        else if cows[indexposition - 1] <= bessieposition:
+            counter++;
+            return counter;
+        else if last != cows[indexposition - 1]:
+            counter++;
+            indexposition--;
+            last = cows[indexposition]
+        else:
+            indexposition--;
+    else:
+        if index == N-1:
+            return counter
+        else if cows[indexposition + 1] <= bessieposition:
+            counter++;
+            return counter;
+        else if last != cows[indexposition - 1]:
+            counter++;
+            indexposition++;
+            last = cows[indexposition]
+return 0;
