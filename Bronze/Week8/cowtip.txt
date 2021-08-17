@@ -12,5 +12,6 @@ for i = N-1 .... 0:
             counter++;
             if (cows == solved):
                 return counter;
+    
             
         
