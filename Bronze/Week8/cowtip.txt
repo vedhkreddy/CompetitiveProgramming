@@ -1,0 +1,16 @@
+read in input into 2D array(cows)
+counter= 0;
+for i = N-1 .... 0:
+    for j = N-1 .... 0:
+        if cows[i][j] == 1:
+            for k = 1..i
+                for l = 1....j
+                    if cows[j][k] == 0:
+                        cows[j][k] = 1;
+                    else:
+                        cows[j][k] = 0;
+            counter++;
+            if (cows == solved):
+                return counter;
+            
+        
