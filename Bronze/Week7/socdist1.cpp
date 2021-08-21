@@ -103,7 +103,7 @@ int solve(int N, int stalls[]){
         }
         //if not
         else{
-            //place the cows in largest and second largest account for the min
+            //place the cows in largest and second largest, account for the min
             //we only care about big2 here because we want minimum, the first cow will go in big1
             
             //if odd it is same as next even number
