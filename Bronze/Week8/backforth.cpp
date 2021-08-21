@@ -5,6 +5,7 @@
 #include <set>
 using namespace std;
 
+//checks if valid combination
 bool check(vector<int> bucketvalues, int cows[]){
     vector<int> cows1, cows2;
     for(int i = 0; i < 10; i++){
@@ -60,6 +61,7 @@ int main(){
         fin >> a;
         cows[i] = a;
     }
+    //select all combinations
     vector<vector<int>> bucketvalues;
     for(int i = 0; i < 20; i++){
         for(int j = 0; j < 20; j++){
@@ -70,6 +72,7 @@ int main(){
             }
         }
     }
+    //make sure combinations are valid before capturing the result using a set to make result unique
     int valuesize = bucketvalues.size();
     set<int> values;
     for(int i = 0; i < valuesize; i++){
