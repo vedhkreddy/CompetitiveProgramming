@@ -1,0 +1,3 @@
+read in biglist of twenty
+iterate through that four times and get all possible
+    
