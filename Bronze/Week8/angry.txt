@@ -1,0 +1,27 @@
+read as array
+sort bales
+big = 0;
+for i in 0...N-1
+    counter = 1
+    indexposition = i+1
+    radius = 1
+    while indexposition != N
+        if bales[indexposition] - bales[indexposition - 1] <= radius:
+            radius++;
+            indexposition++;
+            counter++;
+        else
+            break
+    indexposition = i - 1
+    radius = 1
+    while indexposition != -1
+        if abs(bales[indexposition] - bales[indexposition + 1])
+            radius++;
+            indexposition--;
+            counter++;
+        else
+            break
+    if counter > big
+        big = counter;
+    
+    
