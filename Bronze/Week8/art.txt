@@ -1,0 +1,25 @@
+read in as a 2x2 array
+also read in map : vector<vector<int>> that does NOT INCLUDE 0
+    1 vector for x
+    1 vector for y
+also read in set that DOES NOT INCLUDE 0
+
+set <int> notin;
+
+iterate through set
+    find min and max of x's and y'set
+    for (int i = xmin; i < xmax; i++){
+        for (int j = ymin; j < ymax; j++){
+            if (array[i][j] != the current){
+                add that current to notin
+            }
+        }
+    }
+
+iterate through full set
+    check if int is in notin
+    if not
+        count++
+
+return count
+

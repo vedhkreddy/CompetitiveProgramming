@@ -23,7 +23,7 @@ int blast(int bales[], int bale, int N){
                             found = true;
                         }
                     }
-                    if (found == false){
+                    if (found == false){    
                         exploded.insert(bales[i]);
                         seplist.push_back(bales[i]);
                     }
