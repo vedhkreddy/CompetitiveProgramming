@@ -40,6 +40,7 @@ int main(){
     int N;
     fin >> N;
     vector<pair<string, string>> words;
+    //start initializes every letter to zero
     map<char, int> final = start();
     for(int i = 0; i < N; i++){
         string a, b;
@@ -49,7 +50,9 @@ int main(){
     for(pair<string, string> p : words){
         map<char, int> map1 = find(p.first);
         map<char, int> map2 = find(p.second);
+        //merge by greatest
         map<char, int> map3 = merge(map1, map2, 0);
+        //merge by adding
         final = merge(final, map3, 1);
     }
     for(auto const &x : final){
