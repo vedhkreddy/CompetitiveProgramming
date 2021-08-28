@@ -1,0 +1,30 @@
+map<char, int> merge(map<char, int> , map<char, int>)
+    map<char, int> start
+    iterate through first
+        add
+    iterate through second
+        if greater add
+    return
+map<char, int> find(string)
+    map<char, int> start
+    iterate through string
+        add
+    return
+map<char, int> start(){
+    for char in a to z
+        make zero add to map
+    return map
+}
+
+read in input as vector<pair<string, string>
+map<char, int> final;
+
+for(pair<string, string> : vector){
+    map1 = find(x.first)
+    map2 = find(x.second)
+    map3 = merge(map1, map2)
+    merge(final, map3)
+}
+
+iterate through final
+    output values
