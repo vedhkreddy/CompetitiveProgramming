@@ -1,0 +1,17 @@
+read in map string to vector
+
+isin
+    go through map that is not curelement
+        if in
+            return true
+    return false
+int big = 0
+iterate through map
+    count = 0;  
+    iterate through characteristics
+        if isin(characteristic) == false
+            count++;
+    if (count > big){
+        big = count
+    }
+fout big
