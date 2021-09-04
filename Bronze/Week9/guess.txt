@@ -1,17 +1,15 @@
 read in map string to vector
 
-isin
-    go through map that is not curelement
-        if in
-            return true
-    return false
-int big = 0
-iterate through map
-    count = 0;  
-    iterate through characteristics
-        if isin(characteristic) == false
-            count++;
-    if (count > big){
-        big = count
-    }
-fout big
+def shares
+    big = 0
+    iterate through map
+        iterate through qualities
+            iterate through map again that is not the first one
+            counter = 0
+                iterate through qualities
+                    if equal
+                        increase counter
+            if counter > big
+                big = counter
+
+fout shares+1
