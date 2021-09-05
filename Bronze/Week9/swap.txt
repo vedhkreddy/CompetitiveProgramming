@@ -1,0 +1,18 @@
+read in N, K
+make vector of 1...N
+read in the four ints as pair of pairs
+make four iterators of vector.begin()
+go through the pairs and advance the iterators
+make map of int to vector
+go through and add 1...N to the map
+for (int i = 0; i < (k%4) + 1; i++){
+    reverse[iterator1, iterator2];
+    reverse[iterator3, iterator4];
+}
+
+go through vector
+    output
+
+
+
+
