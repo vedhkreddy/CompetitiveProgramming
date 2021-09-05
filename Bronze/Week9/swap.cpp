@@ -44,6 +44,7 @@ int main(){
             break;
         }
     }
+    cout << back;
     int times = K % back;
     for(int i = 0; i < times; i++){
         reverse(iterator1, iterator2);
