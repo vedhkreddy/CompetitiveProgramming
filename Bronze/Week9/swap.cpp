@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <iterator>
 using namespace std;
 
 int main(){
@@ -21,31 +22,24 @@ int main(){
     auto iterator2 = positions.begin();
     auto iterator3 = positions.begin();
     auto iterator4 = positions.begin();
-    for(int i = 0; i < a-1; i++){
-        iterator1++;
-    }
-    for(int i = 0; i < b; i++){
-        iterator2++;
-    }
-    for(int i = 0; i < c-1; i++){
-        iterator3++;
-    }
-    for(int i = 0; i < d; i++){
-        iterator4++;
-    }
+    //doing the a-1 and b because the reverse function is non-inclusive of the second iterator
+    advance(iterator1, a-1);
+    advance(iterator2, b);
+    advance(iterator3, c-1);
+    advance(iterator4, d);
     cout << *iterator1 << " " << *iterator2 << " " << *iterator3 << " " << *iterator4 << " " << endl;
-    int back;
+    int repeat;
     auto copy = positions;
     for(int i = 1; i < 1e9; i++){
         reverse(iterator1, iterator2);
         reverse(iterator3, iterator4);
         if (positions == copy){
-            back = i;
+            repeat = i;
             break;
         }
     }
-    cout << back;
-    int times = K % back;
+    cout << repeat;
+    int times = K % repeat;
     for(int i = 0; i < times; i++){
         reverse(iterator1, iterator2);
         reverse(iterator3, iterator4);
