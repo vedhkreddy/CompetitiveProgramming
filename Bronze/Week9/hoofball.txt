@@ -1,0 +1,54 @@
+read in as vector
+sort
+
+2past = -1
+vector<vector<int>>
+for i in array
+    vector int;
+    indexposition = i;
+    add indexposition;
+    while true:
+        if (indexposition == 0):
+            indexposition++;
+        else if(indexposition == N-1):
+            indexposition--;
+        else if((array[indexposition - 1] - array[indexposition]) < (array[indexposition + 1] - array[indexposition - 1])):
+            indexposition--;
+        else:
+            indexposition++;
+        if (size of vector < 2){
+            vector.push_back(indexposition);
+        }
+        else if (vector(vector.size() - 2) == indexposition){
+            break;
+        }
+    vector<int>
+    for(int i in vector){
+        add array(i)
+    }
+    add vector to bigvector
+
+vector<int> newvector
+count = 0
+while (newvector != originalvector):
+    count++;
+    vector3<int> s;
+    for(int vector in vector of vectors):
+        if (size greater than vector3)
+            vector3 = curvector
+    go through vector3
+        add to newvector
+    sort newvector
+    std::vector<int>::iterator position = std::find(myVector.begin(), myVector.end(), vector3);
+    if (position != myVector.end()) // == myVector.end() means the element was not found
+        myVector.erase(position);
+
+    iterate through vector in vecofvec
+        iterate through vector3
+            std::vector<int>::iterator position = std::find(myVector.begin(), myVector.end(), i);
+            if (position != myVector.end()) // == myVector.end() means the element was not found
+            myVector.erase(position);
+
+fout count
+
+                 
