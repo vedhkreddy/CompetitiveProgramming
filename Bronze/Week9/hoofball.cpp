@@ -22,7 +22,7 @@ int main(){
     vector<vector<int>> sequences;
     for(int i = 0; i < N; i++){
         vector<int> positions;
-        int indexposition = i;
+        int indexposition = i;   
         positions.push_back(indexposition);
         while (1==1){
             if (indexposition == 0){
