@@ -11,6 +11,8 @@ int main(){
     fin >> N >> M >> K;
     bool init = false;
     int hierarchy[M];
+    //reading in hierarchy
+    //check if cow1 is in the hierarchy
     for(int i = 0; i < M; i++){
         fin >> hierarchy[i];
         if (hierarchy[i] == 1){
@@ -18,10 +20,13 @@ int main(){
         }
     }
     map<int, int> placements;
+    //adding -1 (no cow placed) to all cow positions
     int positions[N];
     for(int i = 0; i < N; i++){
         positions[i] = -1;
     }
+    //reading in cows that demand to be placed
+    //put them in the positions list and also put them in a map
     for(int i = 0; i < K; i++){
         int a, b;
         fin >> a >> b;
@@ -32,28 +37,36 @@ int main(){
         placements[a] = b;
         positions[b-1] = a;
     }
+    //initialize end value variable
     int count = 0;
+    /*
+    if cow1 is in the hierarchy
+    place the hierarchy leftmost because we
+    want to optimize for cow1 to be earliest in
+    the line
+    */
     if (init == true){
         int position = 0;
         for(int i = 0; i < M; i++){
-            if (hierarchy[i] == -1){
-                break;
-            }
-            bool indemand = false;
+            bool cow_demands_position = false;
+            //if cow demands position, move position there 
+            //(it is already placed)
             for(auto const &x : placements){
                 if (x.first == hierarchy[i]){
-                    indemand = true;
+                    cow_demands_position = true;
                     position = x.second - 1;
                     break;
                 }
             }
-            if (indemand == false){
+            if (cow_demands_position == false){
+                //find first empty slot and place it in
                 while(positions[position] != -1){
                     position++;
                 }
                 positions[position] = hierarchy[i];
             }
         }
+        //checking where cow1 is placed
         for(int i = 0; i < N; i++){
             if (positions[i] == 1){
                 count = i+1;
@@ -61,17 +74,22 @@ int main(){
         }
     }
     else{
+        /*
+        place the hierarchy rightmost now
+        because cow1 isn't in it and we want
+        cow1 to be leftmost
+        */
         int position = N-1;
         for(int i = M-1; i > -1; i--){
-            bool indemand = false;
+            bool cow_demands_position = false;
             for(auto const &x : placements){
                 if (x.first == hierarchy[i]){
-                    indemand = true;
+                    cow_demands_position = true;
                     position = x.second - 1;
                     continue;
                 }
             }
-            if (indemand == false){
+            if (cow_demands_position == false){
                 for(int j = position; j > -1; j--){
                     if (positions[j] == -1){
                         position = j;
@@ -87,9 +105,6 @@ int main(){
                 break;
             }
         }
-    }
-    for(int i = 0; i < N; i++){
-        cout << positions[i] << endl;
     }
     fout << count;
 }
