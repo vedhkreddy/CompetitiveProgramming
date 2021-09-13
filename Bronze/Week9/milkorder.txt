@@ -1,0 +1,48 @@
+read in N, M, K
+make list end
+for everything add -1 to it
+iterate M
+    if 1
+        init = true
+    add to a list mlist
+iterate K
+    if 1
+        return pos
+    if in Mlist
+        add to separate map klist
+    add to the end
+count = 0
+if init = true
+    count = 0
+     go through mlist
+        if equal to one
+            break;
+        else
+            inval = false
+            iterate klist
+                if equal (key)
+                    count = value
+                    inval = true
+                    break
+            if inval == false
+                while end[count] != -1:
+                    count++;     
+    count++;     
+else:
+    position = N-1
+    iterate mlist backward
+        iterate klist
+            
+        if found in klist
+            move to that position
+            place
+            position = thatposition - 1
+            continue;
+        iterate end backward from position
+            if -1
+                place
+                position--;
+                break;
+    go through end find index of first -1
+    count = that + 1
+fout count
