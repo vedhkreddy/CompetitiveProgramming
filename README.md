@@ -1,2 +1,2 @@
-# USACO Vplanetcoding Practice
-Contains in, out, and cpp files for problems assigned through VplanetCoding!!!!!!!!
+# USACO Problem Practice
+Contains in, out, and cpp files for competetive programming (USACO/Codeforces/etc.) problems
