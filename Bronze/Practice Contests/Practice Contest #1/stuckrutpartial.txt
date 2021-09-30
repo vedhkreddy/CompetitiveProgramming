@@ -1,0 +1,20 @@
+read in N
+vector of vector of cows: id, direction, x coordinate, y coordinate, squares eaten, stopped
+
+vector<vector<int>> alreadypassedcoordinates
+for(int i = 0; i < 1000; i++){
+    go throw vector cows
+        if increased x,y depending on coordinates is in alreadypassedcoordinates
+            if so, stop the cow
+            if not
+                update squares eaten
+                increase
+                put in alreadypassed coordinates
+}
+go through cows
+    return squares eaten if stopped
+    if not return infinity
+
+
+
+            

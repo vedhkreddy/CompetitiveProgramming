@@ -1,0 +1,7 @@
+read in N
+list of list of cows: id, direction, x coordinate, y coordinate, squares eaten
+list of cows: id, x coordinate, y coordinate
+
+
+
+            

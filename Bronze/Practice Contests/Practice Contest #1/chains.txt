@@ -1,0 +1,15 @@
+get list flowers
+count = N
+for int i = 0; i < N-1
+    for int j = i+1, j < N
+        petalcount = 0
+        for(int z = i; z <= j; z++){
+            petalcount += flowers[z]
+        }
+        for(int z = i; z <= j; z++){
+            if (flowers[z] = (petalcount / (i - j + 1))){
+                count++;
+                break;
+            }
+        }
+cout << count << endl;
