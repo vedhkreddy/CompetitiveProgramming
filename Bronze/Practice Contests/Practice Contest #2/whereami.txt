@@ -1,0 +1,15 @@
+read in array of chars
+iterate length = 1.....N
+    vector<vector<int>> patterns;
+    set<vector<int>> patternset; 
+    for(int i = 0; i < N - length + 1){
+        vector<int> pattern;
+        for(int indexposition = i; j < i + length){
+            pattern.push_back(array[indexposition]);
+        }
+        patterns.push_back(pattern)
+        patternset.insert(pattern)
+    }
+    if patterns.size() = patternset.size()
+        return length
+        exit program

@@ -1,0 +1,24 @@
+read in N
+read in K
+vector<vector<int>> sessions
+count = 0
+iterate 1....N i
+    iterate 1....N
+        first = -1
+        for session in sessions
+            break = false;
+            for cow in session
+                if cow == i or j
+                    if first != -1 and first != cow
+                        break = true;
+                        break
+                    else if first == cow
+                        break
+                    else
+                        first = cow
+            if break == true
+                break
+            else
+                count++
+return count
+            
