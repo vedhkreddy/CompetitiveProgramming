@@ -1,0 +1,40 @@
+/*algorithm basic*/
+
+
+iterate through pairs of cows
+see if they are going to intersect
+if they are check which cow will pass the intersecting point first
+if pass at same time, continue
+see how long it will take to reach that point
+if it is the shortest so far store it in a data structure
+
+after chosen eliminate
+keep going until you cant find and make all the remaining infinity
+
+//START 
+
+
+read in input as bigvector and vector
+while true
+    iterate through vector
+        iterate through vector again
+            if not same and they are differnt directions
+                check if the north one is below the east one and the east one is west of the north one
+                find out which is closer to intersection point
+                if the same
+                    continue
+                else if east is the last one
+                    count up squares
+                    if the smallest update a big variable and also store the cow that is getting boomed
+    if count 10^10
+        break
+    iterate through bigvector
+        update everything with count
+    delete the stopped cow in vector
+    
+
+    
+
+
+
+
