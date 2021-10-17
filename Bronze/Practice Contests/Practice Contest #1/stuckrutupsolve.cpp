@@ -6,20 +6,34 @@
 using namespace std;
 
 int main(){
-    ifstream fin("stuckrutupsolve.in");
     int N;
     cin >> N;
-    // stores: [Direction, x coordinate, y coordinate, stopped (0 no, 1 yes), squarecount, id]
-    vector<vector<int>> allcows;
+    class Cow {
+        public:
+            char dir;
+            int x;
+            int y;
+            bool stopped;
+            int count;
+            int id;
+            Cow(char dir, int x, int y, bool stopped, int count, int id){
+                (*this).dir = dir;
+                (*this).x = x;
+                (*this).y = y;
+                (*this).stopped = stopped;
+                (*this).count = count;
+                (*this).id = id;
+            }
+    };
+    vector<Cow> allcows;
     for(int i = 0; i < N; i++){
         char a;
         int b;
         int c;
         cin >> a >> b >> c;
-        allcows.push_back({a, b, c, 0, 0, i});
+        Cow cow(a, b, c, false, 0, i); 
+        allcows.push_back(cow);
     }
-    //cout << allcows << endl;
-    //cout << allcows << endl;
     while (true){
         int length = allcows.size();
         double count = 1e10;
@@ -29,22 +43,40 @@ int main(){
         for(int i = 0; i < length - 1; i++){
             for(int j = i+1; j < length; j++){
                 cur = 1e10;
-                if (allcows[i][0] != allcows[j][0]){
-                    if (allcows[i][0] == 'N'){
-                        bool n = allcows[j][1] < allcows[i][1] && allcows[i][2] >= allcows[j][2] && allcows[i][2] - allcows[i][4] <= allcows[j][2] && allcows[j][3] == 0;
-                        bool e = allcows[j][1] >= allcows[i][1] && allcows[i][2] < allcows[j][2] && allcows[j][1] - allcows[j][4] <= allcows[i][1] && allcows[i][3] == 0;
+                if (allcows[i].dir != allcows[j].dir){
+                    if (allcows[i].dir == 'N'){
+                        /*
+                        n means the north cow has already gone through the intersection, 
+                            meaning the east cow is the one that will get stopped
+                        e means the same thing except for e
+                        nc stands for north closer and so it means that the north cow is 
+                            closer to the intersection point than the east cow
+                        ec means the same thing except for e
+                        */
+                        bool n = allcows[j].x < allcows[i].x 
+                                    && allcows[i].y >= allcows[j].y 
+                                    && allcows[i].y - allcows[i].count <= allcows[j].y 
+                                    && allcows[j].stopped == 0;
+                        bool e = allcows[j].x >= allcows[i].x 
+                                    && allcows[i].y < allcows[j].y 
+                                    && allcows[j].x - allcows[j].count <= allcows[i].x 
+                                    && allcows[i].stopped == 0;
                         bool nc = false; bool ec = false;
-                        if (allcows[i][3] == 0 && allcows[j][3] == 0){
-                            nc = allcows[j][1] < allcows[i][1] && allcows[i][2] < allcows[j][2] && allcows[i][1] - allcows[j][1] > allcows[j][2] - allcows[i][2];
-                            ec = allcows[j][1] < allcows[i][1] && allcows[i][2] < allcows[j][2] && allcows[i][1] - allcows[j][1] < allcows[j][2] - allcows[i][2];
+                        if (allcows[i].stopped == 0 && allcows[j].stopped == 0){
+                            nc = allcows[j].x < allcows[i].x 
+                                    && allcows[i].y < allcows[j].y 
+                                    && allcows[i].x - allcows[j].x > allcows[j].y - allcows[i].y;
+                            ec = allcows[j].x < allcows[i].x 
+                                    && allcows[i].y < allcows[j].y 
+                                    && allcows[i].x - allcows[j].x < allcows[j].y - allcows[i].y;
                         }
                         if (n == true || nc == true){
-                            cur = allcows[i][1] - allcows[j][1];
-                            idcow = allcows[j][5];
+                            cur = allcows[i].x - allcows[j].x;
+                            idcow = allcows[j].id;
                         }
                         else if (e == true || ec == true){
-                            cur = allcows[j][2] - allcows[i][2];
-                            idcow = allcows[i][5];
+                            cur = allcows[j].y - allcows[i].y;
+                            idcow = allcows[i].id;
                         }
                         if (cur < count){
                             count = cur;
@@ -56,24 +88,30 @@ int main(){
                         }
                     }
                     else{
-                        //n means the north cow has already gone through the intersection, meaning the east cow is the one that will get stopped
-                        //e means the same thing except for e
-                        //nc stands for north closer and so it means that the north cow is closer to the intersection point than the east cow
-                        //ec means the same thing except for e
-                        bool n = allcows[i][1] < allcows[j][1] && allcows[j][2] >= allcows[i][2] && allcows[j][2] - allcows[j][4] <= allcows[i][2] && allcows[i][3] == 0;
-                        bool e = allcows[i][1] >= allcows[j][1] && allcows[j][2] < allcows[i][2] && allcows[i][1] - allcows[i][4] <= allcows[j][1] && allcows[j][3] == 0;
+                        bool n = allcows[i].x < allcows[j].x 
+                                    && allcows[j].y >= allcows[i].y 
+                                    && allcows[j].y - allcows[j].count <= allcows[i].y 
+                                    && allcows[i].stopped == 0;
+                        bool e = allcows[i].x >= allcows[j].x 
+                                    && allcows[j].y < allcows[i].y 
+                                    && allcows[i].x - allcows[i].count <= allcows[j].x 
+                                    && allcows[j].stopped == 0;
                         bool nc = false; bool ec = false;
-                        if (allcows[i][3] == 0 && allcows[j][3] == 0){
-                            nc = allcows[i][1] < allcows[j][1] && allcows[j][2] < allcows[i][2] && allcows[j][1] - allcows[i][1] > allcows[i][2] - allcows[j][2];
-                            ec = allcows[i][1] < allcows[j][1] && allcows[j][2] < allcows[i][2] && allcows[j][1] - allcows[i][1] < allcows[i][2] - allcows[j][2];
+                        if (allcows[i].stopped == 0 && allcows[j].stopped == 0){
+                            nc = allcows[i].x < allcows[j].x 
+                                    && allcows[j].y < allcows[i].y 
+                                    && allcows[j].x - allcows[i].x > allcows[i].y - allcows[j].y;
+                            ec = allcows[i].x < allcows[j].x    
+                                    && allcows[j].y < allcows[i].y 
+                                    && allcows[j].x - allcows[i].x < allcows[i].y - allcows[j].y;
                         }
                         if (n == true || nc == true){
-                            cur = allcows[j][1] - allcows[i][1];
-                            idcow = allcows[i][5];
+                            cur = allcows[j].x - allcows[i].x;
+                            idcow = allcows[i].id;
                         }
                         else if (e  == true || ec == true){
-                            cur = allcows[i][2] - allcows[j][2];
-                            idcow = allcows[j][5];
+                            cur = allcows[i].y - allcows[j].y;
+                            idcow = allcows[j].id;
                         }
                         if (cur < count){
                             count = cur;
@@ -85,14 +123,14 @@ int main(){
                         }
                     }
                 }
-                else if (allcows[i][0] == 'E' && allcows[i][2] == allcows[j][2]){
-                    if (allcows[i][1] < allcows[j][1]){
-                        cur = allcows[j][1] - allcows[i][1];
-                        idcow = allcows[i][5];
+                else if (allcows[i].dir == 'E' && allcows[i].y == allcows[j].y){
+                    if (allcows[i].x < allcows[j].x){
+                        cur = allcows[j].x - allcows[i].x;
+                        idcow = allcows[i].id;
                     }
                     else{
-                        cur = allcows[i][1] - allcows[j][1];
-                        idcow = allcows[j][5];
+                        cur = allcows[i].x - allcows[j].x;
+                        idcow = allcows[j].id;
                     }
                     if (cur < count){
                         count = cur;
@@ -103,14 +141,14 @@ int main(){
                         idstopped.push_back(idcow);
                     }
                 }
-                else if (allcows[i][0] == 'N' && allcows[i][1] == allcows[j][1]){
-                    if (allcows[i][2] < allcows[j][2]){
-                        cur = allcows[j][2] - allcows[i][2];
-                        idcow = allcows[i][5];
+                else if (allcows[i].dir == 'N' && allcows[i].x == allcows[j].x){
+                    if (allcows[i].y < allcows[j].y){
+                        cur = allcows[j].y - allcows[i].y;
+                        idcow = allcows[i].id;
                     }
                     else{
-                        cur = allcows[i][2] - allcows[j][2];
-                        idcow = allcows[j][5];
+                        cur = allcows[i].y - allcows[j].y;
+                        idcow = allcows[j].id;
                     }
                     if (cur < count){
                         count = cur;
@@ -123,14 +161,10 @@ int main(){
                 }
             }
         }
-        for (int i : idstopped){
-            //cout << i << endl;
-        }
         if (idstopped.size() == 0){
-            //cout << allcows;
-            for (vector<int> v : allcows){
-                if (v[3] == 1){
-                        cout << v[4] + 1 << endl;
+            for (Cow c : allcows){
+                if (c.stopped == 1){
+                        cout << c.count + 1 << endl;
                     }
                 else{
                         cout << "Infinity" << endl;
@@ -138,40 +172,40 @@ int main(){
             }
             return 0;
         }        
-        for(vector<int> v : allcows){
+        for(Cow v : allcows){
             for(int i : idstopped){
-                if (v[5] == i){
-                    allcows[v[5]][4] += count - 1;
-                    allcows[v[5]][3] = 1;
-                    v[3] = 1;
-                    if (v[0] == 'E'){
-                        allcows[v[5]][1] += count - 1;
+                if (v.id == i){
+                    allcows[v.id].count += count - 1;
+                    allcows[v.id].stopped = 1;
+                    v.stopped = true;
+                    if (v.dir == 'E'){
+                        allcows[v.id].x += count - 1;
                     }
                     else{
-                        allcows[v[5]][2] += count - 1;
+                        allcows[v.id].y += count - 1;
                     }
                 }
             }
-            if (v[3] != 1){
-                allcows[v[5]][4] += count;
-                if (v[0] == 'E'){
-                    allcows[v[5]][1] += count;
+            if (v.stopped != true){
+                allcows[v.id].count += count;
+                if (v.dir == 'E'){
+                    allcows[v.id].x += count;
                 }
                 else{
-                    allcows[v[5]][2] += count;
+                    allcows[v.id].y += count;
                 }
             }
         }
         bool allstopped = true;
-        for (vector<int> v : allcows){
-            if (v[3] == 0){
+        for (Cow v : allcows){
+            if (v.stopped == false){
                 allstopped = false;
                 break;
             }
         }
         if (allstopped == true){
-            for(vector<int> v : allcows){
-                cout << v[4] + 1 << endl;
+            for(Cow v : allcows){
+                cout << v.count + 1 << endl;
             }
             return 0;
         }
