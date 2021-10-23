@@ -1,0 +1,20 @@
+//partial sol
+read in K
+
+curspeed = 1
+distance = 1
+
+while true:
+    if ((curspeed + 2)(curspeed + 1) / 2 + distance > K){
+        break;
+    }
+    else{
+        curspeed++;
+        distance += curspeed;
+    }
+
+time = curspeed x 2
+distance *= 2
+time += (K - distance)
+
+fout << time;

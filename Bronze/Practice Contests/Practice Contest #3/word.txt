@@ -1,0 +1,8 @@
+read in input as vector
+count = 0
+iterate through vector
+    if K - count - characters in word >= 0
+        cout << " " << word
+    else
+        count = characters in word
+        cout << newline << word

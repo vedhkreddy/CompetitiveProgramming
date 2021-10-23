@@ -1,0 +1,11 @@
+read in input as 1 array
+for (int i = 1; i < array[0]; i++){
+    vector<int> perm;
+    perm.push_back(i);
+    curcount = i;
+    for (int i : beforearray){
+        perm.push_back(i - curcount);
+        curcount = i - curcount;
+    }
+    
+}
