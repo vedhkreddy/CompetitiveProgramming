@@ -1,0 +1,12 @@
+read in both as a string
+find = 0
+count = 0
+while find != -1
+    iterate through 2string
+        if (cur = 1string[find])
+            if (find != 1string.size - 1)
+                find++
+            else
+                find = -1
+                break
+    count++;

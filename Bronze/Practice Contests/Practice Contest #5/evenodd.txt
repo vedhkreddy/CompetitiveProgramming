@@ -1,0 +1,43 @@
+read in as VECTOR
+count = 0
+cur = 0
+while vectorsize != 0
+    if (cur == 0){
+        int indeven = -1
+        iterate vector
+            if %2 = 0
+                indeven = index
+                break;
+        if indeven = -1
+            if vector still has 2+ elements in it 
+                remove both of them
+                count++;
+            else
+                count--;
+                break;
+        else{
+            count++;
+        }
+    }
+    else{
+        int indeven = -1
+        iterate vector
+            if %2 = 1
+                indeven = index
+                break;
+        if (indeven == -1){
+            remove the first one
+        }
+        else{
+            remove the index one
+            count++;
+        }
+    }
+    if (cur == 0){
+        cur = 1;
+    }
+    else{
+        cur = 0;
+    }
+cout << count
+
