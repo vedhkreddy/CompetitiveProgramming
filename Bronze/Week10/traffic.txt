@@ -1,0 +1,46 @@
+read in input into an array
+pair<int, int> first;
+pair<int, int> second;
+
+cur = true
+iterate backwards with elem:
+    if on
+        if cur = false
+            cur = false
+            continue
+        else
+            first.first -= elem.2nd
+            first.second -= elem.first
+    else if off
+        if cur = false
+            cur = false
+            continue
+        else
+            first.first += elem.first
+            first.second += elem.second
+    else{
+        first.first = max(first.first, elem.first)
+        first.second = min(first.second, elem.second)
+    }
+
+cur = true
+iterate FORWARDS with elem:
+    if on
+        if cur = false
+            cur = false
+            continue
+        else
+            first.first += elem.first
+            first.second += elem.second
+    else if off
+        if cur = false
+            cur = false
+            continue
+        else
+            first.first -= elem.second
+            first.second -= elem.first
+    else{
+        first.first = max(first.first, elem.first)
+        first.second = min(first.second, elem.second)
+    }
+
