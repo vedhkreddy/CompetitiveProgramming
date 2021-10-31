@@ -15,6 +15,7 @@ bool inalphabetical(string a, string b){
 }
 
 int main(){
+    //http://usaco.org/index.php?page=viewproblem2&cpid=1132
     ifstream fin ("acow2.in");
     int K, N;
     cin >> K >> N;

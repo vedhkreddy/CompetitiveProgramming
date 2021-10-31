@@ -4,6 +4,7 @@
 using namespace std;
 
 int main(){
+    //http://usaco.org/index.php?page=viewproblem2&cpid=1131
     int N, L;
     cin >> N >> L;
     int citations[N];

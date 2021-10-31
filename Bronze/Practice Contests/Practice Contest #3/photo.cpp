@@ -5,6 +5,7 @@
 using namespace std;
 
 int main(){
+    //http://usaco.org/index.php?page=viewproblem2&cpid=988
     ifstream fin("photo.in");
     ofstream fout("photo.out");
     int N;

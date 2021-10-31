@@ -4,6 +4,7 @@
 using namespace std;
 
 int main(){
+    //http://usaco.org/index.php?page=viewproblem2&cpid=1085
     long long N;
     cin >> N;
     long long cowheights[N];

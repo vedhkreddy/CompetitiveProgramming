@@ -4,6 +4,7 @@
 using namespace std;
 
 int main(){
+    //http://usaco.org/index.php?page=viewproblem2&cpid=1059
     vector<int> numbers;
     for(int i = 0; i < 7; i++){
         int num;

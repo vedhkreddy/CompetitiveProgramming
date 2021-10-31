@@ -6,6 +6,7 @@
 using namespace std;
 
 int main(){
+    //http://usaco.org/index.php?page=viewproblem2&cpid=1060
     int N;
     cin >> N;
     class Cow {

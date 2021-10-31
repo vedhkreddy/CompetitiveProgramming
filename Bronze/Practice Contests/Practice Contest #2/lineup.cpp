@@ -7,6 +7,7 @@
 using namespace std;
 
 int main(){
+    //http://usaco.org/index.php?page=viewproblem2&cpid=965
     ifstream fin("lineup.in");
     ofstream fout("lineup.out");
     int N;

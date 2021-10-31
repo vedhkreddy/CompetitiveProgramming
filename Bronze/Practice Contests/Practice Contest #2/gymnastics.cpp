@@ -4,6 +4,7 @@
 using namespace std;
 
 int main(){
+    //http://usaco.org/index.php?page=viewproblem2&cpid=963
     ifstream fin("gymnastics.in");
     ofstream fout("gymnastics.out");
     int K, N;

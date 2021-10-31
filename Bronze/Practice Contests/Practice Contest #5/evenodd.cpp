@@ -5,6 +5,7 @@
 using namespace std;
 
 int main(){
+    //http://usaco.org/index.php?page=viewproblem2&cpid=1084
     //ifstream cin("evenodd.in");
     int N;
     cin >> N;

@@ -5,6 +5,7 @@
 using namespace std;
 
 int main(){
+    //http://usaco.org/index.php?page=viewproblem2&cpid=964
     ifstream fin("whereami.in");
     ofstream fout("whereami.out");
     int N;

@@ -5,6 +5,7 @@
 using namespace std;
 
 int main(){
+    //http://usaco.org/index.php?page=viewproblem2&cpid=917
     ifstream fin("traffic.in");
     ofstream fout("traffic.out");
     int N;

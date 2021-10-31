@@ -5,6 +5,7 @@
 using namespace std;
 
 int main(){
+    //http://usaco.org/index.php?page=viewproblem2&cpid=1133
     int N, M;
     cin >> N >> M;
     char grid[N][M];
