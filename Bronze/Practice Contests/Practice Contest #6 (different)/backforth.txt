@@ -1,0 +1,14 @@
+func check{
+    takes 4 numbers
+    go through first list:
+        can i find first number
+        if can'that
+            return bad
+        add it to second list
+        go through second list
+            can i find that number
+            ....etc.
+}
+
+main
+    iterate through a BIGLIST OF ALL 20 4 times

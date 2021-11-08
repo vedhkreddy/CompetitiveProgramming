@@ -1,0 +1,11 @@
+read in input as map: int to vector
+create an array of length N GLOBALLY
+
+do the following four times:
+    go through array
+        find first one that is zero store it 
+        then you keep going until you find another blank
+            go through the blanks that it cannot be
+                if it is in one of those, then skip
+                else map it that number
+    
