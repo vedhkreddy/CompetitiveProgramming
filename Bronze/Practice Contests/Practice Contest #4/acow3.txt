@@ -1,0 +1,13 @@
+read in input
+count = 0
+for each grass
+    make pairs add to a list
+
+while length of pair is 0:
+    for each pair
+        if only 1 grass found, eliminate pair, eliminate grass
+            increase count by 1
+        if No grass found, elminate pair
+
+    eat first pair in pairs
+        increase count by 1
