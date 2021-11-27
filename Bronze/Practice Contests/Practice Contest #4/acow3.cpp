@@ -4,7 +4,8 @@
 #include <set>
 using namespace std;
 
-set<vector<pair<int, int>>> makepairs(vector<vector<char>> grid, int N, int M){    
+int solve(vector<vector<char>> grid, int N, int M){    
+    int count = 0;
     set<vector<pair<int, int>>> pairs;
     for (int i = 0; i < N; i++){
         for (int j = 0; j < M; j++){
@@ -30,38 +31,40 @@ set<vector<pair<int, int>>> makepairs(vector<vector<char>> grid, int N, int M){
                         cur.push_back(make_pair(i, j+1));
                     }
                 }
-                for (pair<int, int> i : cur){
-                    for (pair<int, int> j : cur){
-                        if (i != j){
-                            vector<pair<int, int>> singlepair;
-                            if (i.first > j.first){
-                                auto tmp = j;
-                                j = i;
-                                i = tmp;
-                            }
-                            else if (i.first == j.first){
-                                if (i.second > j.second){
-                                    auto tmp = j;
-                                    j = i;
-                                    i = tmp;
-                                }
-                            }
-                            singlepair.push_back(i);
-                            singlepair.push_back(j);
-                            //cout << i.first << " " << i.second << " " << j.first << " " << j.second << endl;
-                            pairs.insert(singlepair);
+                if (size(cur) > 2){
+                    //means there is two opposite (cannot meet elsewhere) so increment count
+                    count++;
+                }
+                if (size(cur) == 2){
+                    //add to set to avoid double counting
+                    auto i = cur[0];
+                    auto j = cur[1];
+                    if (i.first > j.first){
+                        auto tmp = j;
+                        j = i;
+                        i = tmp;
+                    }
+                    else if (i.first == j.first){
+                        if (i.second > j.second){
+                            auto tmp = j;
+                            j = i;
+                            i = tmp;
                         }
                     }
+                    vector<pair<int, int>> v;
+                    v.push_back(i);
+                    v.push_back(j);
+                    pairs.insert(v);
                 }
             }
         }
     }
-    return pairs;
+    return count + pairs.size();
 }
 
 
 int main(){
-    ifstream cin("acow3.in");
+    //ifstream cin("acow3.in");
     int N, M;
     cin >> N >> M;
     vector<vector<char>> grid;
@@ -74,74 +77,5 @@ int main(){
         }
         grid.push_back(row);
     }
-    int count = 0;
-    set<vector<pair<int, int>>> pairs = makepairs(grid, N, M);
-    while (pairs.size() != 0){
-        vector<vector<pair<int, int>>> deletions;        
-        for (auto v : pairs){
-            if (v[0].first == v[1].first){
-                if (grid[v[0].first][(v[0].second + 1)] == 'G'){
-                    count++;
-                    //cout << v[0].first << " " << v[0].second << " " << v[1].first << " " << v[1].second << endl;
-                    grid[v[0].first][(v[0].second + 1)] = '.';
-                }
-                deletions.push_back(v);
-            }
-            else if (v[0].second == v[1].second){
-                if (grid[v[0].first + 1][v[0].second] == 'G'){
-                    count++;
-                    //cout << v[0].first << " " << v[0].second << " " << v[1].first << " " << v[1].second << endl;
-                    grid[v[0].first + 1][v[0].second] = '.';
-                }
-                deletions.push_back(v);
-            }
-            else{
-                bool first = grid[v[0].first][v[1].second] == 'G';
-                bool second = grid[v[1].first][v[0].second] == 'G';
-                if (first == true && second == true){
-            
-                }
-                else if (first == true){
-                    grid[v[0].first][v[1].second] = '.';
-                    count++;
-                    //cout << v[0].first << " " << v[0].second << " " << v[1].first << " " << v[1].second << endl;
-                    deletions.push_back(v);
-                }
-                else if (second == true){
-                    grid[v[1].first][v[0].second] = '.';
-                    count++;
-                    //cout << v[0].first << " " << v[0].second << " " << v[1].first << " " << v[1].second << endl;
-                    deletions.push_back(v);
-                }
-                else{
-                    deletions.push_back(v);
-                }
-            }
-        }
-        for (auto v : deletions){
-            pairs.erase(v);
-
-        }
-        for (auto v : pairs){
-            bool first = grid[v[0].first][v[1].second] == 'G';
-            bool second = grid[v[1].first][v[0].second] == 'G';
-            if (first == true){
-                grid[v[0].first][v[1].second] = '.';
-                count++;
-                //cout << v[0].first << " " << v[0].second << " " << v[1].first << " " << v[1].second << endl;
-                deletions.push_back(v);
-            }
-            else{
-                grid[v[1].first][v[0].second] = '.';
-                count++;
-                //cout << v[0].first << " " << v[0].second << " " << v[1].first << " " << v[1].second << endl;
-                deletions.push_back(v);
-            }
-            break;
-        }
-        for (auto v : deletions){
-            pairs.erase(v);
-        }
-    }
-    cout << count;
+    cout << solve(grid, N, M);
 }
