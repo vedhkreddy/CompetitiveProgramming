@@ -1,0 +1,12 @@
+read in string of input
+
+go through
+    while (check(pair<G, H>) == true || p1 + p2 < 3){
+        if (p1 + p2 > 3){
+            increment count
+        }
+        add
+    }
+
+return
+count

@@ -1,0 +1,14 @@
+os this is what you do:
+
+if it is case 1:
+    output correct answer
+
+go through each case
+    for 1....N
+        for 1...N
+            if 1:
+                they have to add up to N
+            if 2:
+                the third one has to add up to N
+            if 3: the third and fourth are dictated because in total there has to be N - 1 d's and N - 1 r's
+            make the list

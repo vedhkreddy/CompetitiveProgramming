@@ -28,6 +28,6 @@ int main(){
         if (patterns.size() == patternset.size()){
             fout << length;
             return 0;
-        }
+        } 
     }
 }

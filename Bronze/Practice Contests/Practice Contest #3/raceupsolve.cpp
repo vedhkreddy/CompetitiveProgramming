@@ -6,35 +6,43 @@ using namespace std;
 float distancebymax (float b, float x){
     return (2 * pow(b, 2) - pow(x, 2) + x) / 2;
 }
-
-float max_speed(float x, float K){
-    return floor(sqrt((2 * K + pow(x, 2) - 3 * x) / 2));
-}
-
-float findtime(float x, float K){
-    if (x >= K){
-        int t = 0;
-        for (int i = 1; i <= K; i++){
-            if (i * (i + 1) / 2 > K){
-                return i;
-            }
+float greatestspeed(float K){
+    for (int i = 1; i <= K; i++){
+        if (i * (i + 1) / 2 >= K){
+            return i;
         }
     }
+    return 1;
+}
+float max_speed(float x, float K){
+    if (K == 1){
+        return 1;
+    }
+    return floor(sqrt((2 * K + pow(x, 2)) / 2));
+}
+float findtime(float x, float K){
     float maxspeed = max_speed(x, K);
+    float biggestspeed = greatestspeed(K);
+    if (maxspeed >= biggestspeed){
+        return biggestspeed;
+    }
     float time = (2*maxspeed) - x;
     float distance = distancebymax(maxspeed, x);
     float high = maxspeed;
     while (distance < K){
-        bool found = false;
-        for(float y = high; y > x; y-= 1){
-            if (pow(y, 2) + 2*y - pow(x, 2) - x < K){
-                distance += y;
-                time+= 1;
-                found = true;
-                break;
+        if (high > x){
+            if (distance + ((x + 2) * (high - x + 1) / 2) <= K){
+                distance += high;
+            }
+            else{
+                if (high > x){
+                    distance += high - 1;
+                    time++;
+                }
+                high -= 1;
             }
         }
-        if (found == false){
+        else{
             time += ceil((K - distance) / x);
             break;
         }
