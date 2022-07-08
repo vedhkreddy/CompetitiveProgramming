@@ -42,44 +42,45 @@ int32_t main(){
         prev = rental[cur];
         cur++;
     }
-    int milkprice = 0;
+    int milkprice = 0;                                
     int max = 0;
     int counter = 0;
-    int curmilk = cows[counter];
-    int curprice = 0;    
-    while(buyprices.size() != 0 && counter < n){
-        int j = 0;
-        int a = buyprices[j].first;
-        if (buyprices[j].first >= curmilk){
-            buyprices[j].first -= curmilk;
-            milkprice += (buyprices[j].second * curmilk);
-            if (n-counter-2 >= r){
+    int j = 0;
+    for (int i = 0; i <= n; i++){
+        int curprice = 0;
+        if (i == 0){
+            curprice = rental[r-1];
+        }
+        else{
+            int curmilk = cows[i-1];
+            while(buyprices.size() != 0 && j < m){
+                int a = buyprices[j].first;
+                if (buyprices[j].first >= curmilk){
+                    buyprices[j].first -= curmilk;
+                    milkprice += (buyprices[j].second * curmilk);
+                    break;
+                }
+                else{
+                    milkprice += buyprices[j].first * buyprices[j].second;
+                    curmilk -= buyprices[j].first;
+                    j++;
+                }
+            }
+            if (n-i >= r){
                 curprice += rental[r-1];
             }   
-            else if (n - counter - 2 <= 0){
+            else if (n - i - 1 <= 0){
                 curprice += rental[0];
             }
             else{
-                curprice += rental[n-counter-2];
+                curprice += rental[n-i-1];
             }
             curprice += milkprice;
-            if (curprice > max){
-                max = curprice;
-            }
-            curprice = 0;
-            counter++;
-            curmilk = cows[counter];
         }
-
-        else{
-            milkprice += buyprices[j].first * buyprices[j].second;
-            curmilk -= buyprices[j].first;
-            buyprices.erase(buyprices.begin());
+        if (curprice > max){
+            max = curprice;
         }
-    
-    }
-    if (rental[r-1] > max){
-         max = rental[r-1];
     }
     fout << max;
+
 }
