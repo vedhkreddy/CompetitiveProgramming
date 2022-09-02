@@ -1,0 +1,20 @@
+vector<int>[1000][1000];
+int add[1000][1000];
+
+read in input{
+    int1, int2, int3, int4
+    add these to the vector
+}
+
+iterate i
+    iterate j
+        cur = add[i][j]
+        iterate vec
+            if new
+                increment cur
+            else
+                decrement cur
+        if cur > 0 and cur + down > 0
+            increment downcur 
+        if cur > 0 and cur + right > 0
+            increment rightcur
