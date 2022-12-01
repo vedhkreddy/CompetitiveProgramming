@@ -5,7 +5,7 @@
 using namespace std;
 
 int main(){
-    //http://usaco.org/index.php?page=viewproblem2&cpid=807
+    //  
     ifstream cin("teleport.in");
     ofstream cout("teleport.out");
     int a, b, x, y;
