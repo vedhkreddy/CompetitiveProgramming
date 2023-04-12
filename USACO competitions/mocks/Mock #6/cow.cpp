@@ -2,9 +2,7 @@
 #include <fstream>
 #include <vector>
 using namespace std;
-
 int pref[200010][3];
-
 int main(){
     string s; int q;
     cin >> s >> q;
