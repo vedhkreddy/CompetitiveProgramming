@@ -8,7 +8,7 @@ bool cycle = 0;
 
 void dfs(int x){
     visited[x] = 1;
-    for (int i : adj[x]){
+    for (int i : adj[x]){   x
         if (visited[i] == 1){
             cycle = 1;
             return;
