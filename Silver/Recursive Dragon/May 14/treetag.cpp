@@ -42,7 +42,7 @@ int dfs2(int c, int l) {
  
 int main() {
  
-	scanf("%d", &t);
+	cin>> t;
 	while (t--) {
 		cin >> n >> a >> b >> da >> db;
 		for (int i = 1; i <= n; i++)
