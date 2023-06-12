@@ -30,7 +30,7 @@ void dfs(int x, int dist){
     }
 }
 
-int32_t diam(){
+int diam(){
     dfs(1, 0);
     int p1 = maxnode;
     maxdist = 0;
