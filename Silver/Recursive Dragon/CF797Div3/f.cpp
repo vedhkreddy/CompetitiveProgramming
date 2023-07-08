@@ -24,6 +24,7 @@ typedef vector<int> vi;
 typedef vector<ll> vl;
 typedef vector<ld> vld;
 typedef vector<str> vs;
+typedef vector<char> vc;
 typedef vector<pi> vpi;
 typedef vector<pl> vpl;
 typedef vector<si> vsi;
@@ -62,6 +63,14 @@ int fstTrue(function<bool(int)> f, int lo, int hi) {
 		f(mid) ? hi = mid : lo = mid+1;
 	}
 	return lo;
+}
+int lstTrue(function<bool(int)> f, int lo, int hi) {
+    --lo; assert(lo <= hi);
+    while(lo < hi){
+        int mid = lo + (hi - lo + 1) / 2;
+        f(mid) ? lo = mid : hi = mid - 1;
+    }
+    return lo;
 }
 
 const ll MOD = 1e9+7;
@@ -103,61 +112,106 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define dbg(x...)
 #endif
 
-const int mxN = 2e5+5;
+const int mxN = 201;
 int n;
-int par[mxN];
-int sz[mxN];
+vi graph[mxN];
+int cycles[mxN];
+bool visited[mxN];
+int counts[mxN];
+int cur[mxN];
+ll res = 1;
+bool finished[mxN];
 
-int get(int x) {return x == par[x] ? x : par[x] = get(par[x]);}
-void unite(int x, int y) {
-    x = get(x), y = get(y);
-    if (x == y) return;
-    if (sz[x] > sz[y]) swap(x,y);
-    par[x] = y;
-    sz[y] += sz[x];
-}
-void init() {
-    forr(i,0,n+5) {
-        sz[i] = 1;
-        par[i] = i;
+void resetcur(){
+    forr(i, 0, mxN){
+        cur[i] = 0;
     }
+}
+
+void reset(){
+    forr(i, 0, mxN){
+        cycles[i] = 0;
+        visited[i] = false;
+        counts[i] = 0;
+        cur[i] = 0;
+        finished[i] = false;
+        graph[i] = {};
+    }
+    res = 1;
+}
+
+void dfs(int x, int cycleid){
+    visited[x] = true;
+    cycles[cycleid]++;
+    counts[x] = cycleid;
+    trav(i, graph[x]){
+        if(!visited[i]){
+            dfs(i, cycleid);
+        }
+    }
+}
+
+void findcycles(){
+    int cycleid = 0;
+    forr(i, 1, n+1){
+        if (!visited[i]){
+            dfs(i, cycleid);
+            cycleid++;
+        }
+    }
+}
+
+vc swap(vc org, vi perm){
+    vc out(sz(org), 'A');
+    forr(i, 0, n){
+        out[i] = org[perm[i] - 1];
+    }
+    return out;    
 }
 
 void solve() {
+    reset();
     cin >> n;
-    init();
-    vpi bad;
-    forr(i, 0, n-1){
-        int a, b; cin >> a >> b;
-        a--; b--;
-        if (get(a) != get(b)){
-            unite(a, b);
-        }
-        else{
-            bad.pb(mp(a, b));
-        }
-    }
-    vpi good;
+    vector<int> v;
+    vc original;
+    vc changed;
     forr(i, 0, n){
-        forr(j, 0, n){
-            if (get(i) != get(j)){
-                unite(i, j);
-                good.pb(mp(i, j));
+        char c; cin >> c;
+        original.pb(c);
+        changed.pb(c);
+    }
+    //dbg(original);
+    forr(i, 0, n){
+        int a; cin >>a;
+        v.pb(a);
+        graph[i+1].pb(a);
+    }
+    findcycles();
+    int rotations = 1;
+    forr(i, 0, n+2){
+        resetcur();
+        changed = swap(changed, v);
+        //dbg(changed);
+        forr(i, 0, n){
+            if (changed[i] == original[i]){
+                cur[counts[i+1]]++;
+                if (cur[counts[i+1]] == cycles[counts[i+1]] && finished[counts[i+1]] == false){
+                    res = lcm(res, rotations);
+                    finished[counts[i+1]] = true;
+                }
             }
         }
+        rotations++;
     }
-    cout << sz(good) << endl;
-    forr(i, 0, sz(good)){
-        cout << bad[i].first + 1 << " " << bad[i].second + 1 << " " << good[i].first + 1 << " " << good[i].second + 1 << endl;
-    }
+    cout << res << endl;
 }
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-	// freopen("Codeforces.in", "r", stdin);
+	//freopen("Codeforces.in", "r", stdin);
 	// freopen("Codeforces.out", "w", stdout);
 
 	int t = 1;
-	// cin >> tc;
+	cin >> t;
 	while (t--) solve();
 }

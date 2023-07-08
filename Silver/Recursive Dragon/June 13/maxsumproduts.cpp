@@ -7,8 +7,7 @@ ll a[N], b[N];
 int n;
 ll ans = 0;
  
-int main()
-{
+int main(){
 	cin >> n;
 	for (int i = 0; i < n; i++)
 		cin >> a[i];

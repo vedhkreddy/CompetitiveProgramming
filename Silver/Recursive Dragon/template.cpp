@@ -24,6 +24,7 @@ typedef vector<int> vi;
 typedef vector<ll> vl;
 typedef vector<ld> vld;
 typedef vector<str> vs;
+typedef vector<char> vc;
 typedef vector<pi> vpi;
 typedef vector<pl> vpl;
 typedef vector<si> vsi;
@@ -62,6 +63,14 @@ int fstTrue(function<bool(int)> f, int lo, int hi) {
 		f(mid) ? hi = mid : lo = mid+1;
 	}
 	return lo;
+}
+int lstTrue(function<bool(int)> f, int lo, int hi) {
+    --lo; assert(lo <= hi);
+    while(lo < hi){
+        int mid = lo + (hi - lo + 1) / 2;
+        f(mid) ? lo = mid : hi = mid - 1;
+    }
+    return lo;
 }
 
 const ll MOD = 1e9+7;
@@ -105,51 +114,9 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 
 const int mxN = 2e5+5;
 int n;
-int par[mxN];
-int sz[mxN];
-
-int get(int x) {return x == par[x] ? x : par[x] = get(par[x]);}
-void unite(int x, int y) {
-    x = get(x), y = get(y);
-    if (x == y) return;
-    if (sz[x] > sz[y]) swap(x,y);
-    par[x] = y;
-    sz[y] += sz[x];
-}
-void init() {
-    forr(i,0,n+5) {
-        sz[i] = 1;
-        par[i] = i;
-    }
-}
 
 void solve() {
-    cin >> n;
-    init();
-    vpi bad;
-    forr(i, 0, n-1){
-        int a, b; cin >> a >> b;
-        a--; b--;
-        if (get(a) != get(b)){
-            unite(a, b);
-        }
-        else{
-            bad.pb(mp(a, b));
-        }
-    }
-    vpi good;
-    forr(i, 0, n){
-        forr(j, 0, n){
-            if (get(i) != get(j)){
-                unite(i, j);
-                good.pb(mp(i, j));
-            }
-        }
-    }
-    cout << sz(good) << endl;
-    forr(i, 0, sz(good)){
-        cout << bad[i].first + 1 << " " << bad[i].second + 1 << " " << good[i].first + 1 << " " << good[i].second + 1 << endl;
-    }
+
 }
 
 int main() {

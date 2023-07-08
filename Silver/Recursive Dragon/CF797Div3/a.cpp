@@ -105,50 +105,21 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 
 const int mxN = 2e5+5;
 int n;
-int par[mxN];
-int sz[mxN];
-
-int get(int x) {return x == par[x] ? x : par[x] = get(par[x]);}
-void unite(int x, int y) {
-    x = get(x), y = get(y);
-    if (x == y) return;
-    if (sz[x] > sz[y]) swap(x,y);
-    par[x] = y;
-    sz[y] += sz[x];
-}
-void init() {
-    forr(i,0,n+5) {
-        sz[i] = 1;
-        par[i] = i;
-    }
-}
 
 void solve() {
     cin >> n;
-    init();
-    vpi bad;
-    forr(i, 0, n-1){
-        int a, b; cin >> a >> b;
-        a--; b--;
-        if (get(a) != get(b)){
-            unite(a, b);
+    forr(i, 3, n){
+        int j = n-i;
+        j /= 2;
+        int k = n - i - j;
+        if (j + 1 < i && k > 1){
+            k--;
+            j++;
         }
-        else{
-            bad.pb(mp(a, b));
+        if (k < j && j < i){
+            cout << j << " " << i << " " << k << endl;
+            return;
         }
-    }
-    vpi good;
-    forr(i, 0, n){
-        forr(j, 0, n){
-            if (get(i) != get(j)){
-                unite(i, j);
-                good.pb(mp(i, j));
-            }
-        }
-    }
-    cout << sz(good) << endl;
-    forr(i, 0, sz(good)){
-        cout << bad[i].first + 1 << " " << bad[i].second + 1 << " " << good[i].first + 1 << " " << good[i].second + 1 << endl;
     }
 }
 
@@ -158,6 +129,6 @@ int main() {
 	// freopen("Codeforces.out", "w", stdout);
 
 	int t = 1;
-	// cin >> tc;
+	cin >> t;
 	while (t--) solve();
 }

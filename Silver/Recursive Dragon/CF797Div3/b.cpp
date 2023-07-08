@@ -105,50 +105,59 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 
 const int mxN = 2e5+5;
 int n;
-int par[mxN];
-int sz[mxN];
-
-int get(int x) {return x == par[x] ? x : par[x] = get(par[x]);}
-void unite(int x, int y) {
-    x = get(x), y = get(y);
-    if (x == y) return;
-    if (sz[x] > sz[y]) swap(x,y);
-    par[x] = y;
-    sz[y] += sz[x];
-}
-void init() {
-    forr(i,0,n+5) {
-        sz[i] = 1;
-        par[i] = i;
-    }
-}
 
 void solve() {
     cin >> n;
-    init();
-    vpi bad;
-    forr(i, 0, n-1){
-        int a, b; cin >> a >> b;
-        a--; b--;
-        if (get(a) != get(b)){
-            unite(a, b);
+    vl a;
+    vl b;
+    forr(i, 0, n){
+        ll x; cin >> x;
+        a.pb(x);
+    }
+    forr(i, 0, n){
+        ll x; cin >> x;
+        b.pb(x);
+    }
+    bool greater = false;
+    int diff;
+    forr(i, 0, n){
+        if (a[i] > 0 && b[i] > 0){
+            greater = true;
+            diff = a[i] - b[i];
         }
-        else{
-            bad.pb(mp(a, b));
+        if (b[i] > a[i]){
+            cout << "NO" << endl;
+            return;
         }
     }
-    vpi good;
+    if (greater == false){
+        cout << "YES" << endl;
+        return;
+    }
+    if (diff < 0){
+        cout << "NO" << endl;
+        return;
+    }
+    bool good = true;
     forr(i, 0, n){
-        forr(j, 0, n){
-            if (get(i) != get(j)){
-                unite(i, j);
-                good.pb(mp(i, j));
+        if (b[i] == 0){
+            if (a[i] > diff){
+                good = false;
+                break;
+            }
+        }
+        else{
+            if (a[i] - b[i] != diff){
+                good = false;
+                break;
             }
         }
     }
-    cout << sz(good) << endl;
-    forr(i, 0, sz(good)){
-        cout << bad[i].first + 1 << " " << bad[i].second + 1 << " " << good[i].first + 1 << " " << good[i].second + 1 << endl;
+    if (good == false){
+        cout << "NO" << endl;
+    }
+    else{
+        cout << "YES" << endl;
     }
 }
 
@@ -158,6 +167,6 @@ int main() {
 	// freopen("Codeforces.out", "w", stdout);
 
 	int t = 1;
-	// cin >> tc;
+	cin >> t;
 	while (t--) solve();
 }

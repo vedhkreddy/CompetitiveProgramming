@@ -18,7 +18,7 @@ int main(){
 		fill(vis, vis + n + 1, 0);
 		fill(c, c + n + 1, 0);
 		ans = 0;
-		for(ll i = 0; i < n; i++){
+		for(ll i = 0 ; i < n; i++){
 			cin >> a[i];
 			c[a[i]]++;
 		}
