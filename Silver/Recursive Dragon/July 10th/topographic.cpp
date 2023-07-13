@@ -116,10 +116,30 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 
 const int mxN = 2e5+5;
 int n;
+int topography[mxN][mxN];
+int par[mxN];
+int sz[mxN];
+
+int get(int x) {return x == par[x] ? x : par[x] = get(par[x]);}
+void unite(int x, int y) {
+    x = get(x), y = get(y);
+    if (x == y) return;
+    if (sz[x] > sz[y]) swap(x,y);
+    par[x] = y;
+    sz[y] += sz[x];
+}
+void init() {
+    forr(i,0,n+1) {
+        sz[i] = 1;
+        par[i] = i;
+    }
+}
+
 
 void solve() {
-
-}
+    cin >> n;
+    
+}   
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

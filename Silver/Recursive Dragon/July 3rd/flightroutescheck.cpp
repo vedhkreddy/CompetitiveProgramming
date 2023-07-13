@@ -30,8 +30,6 @@ typedef vector<pl> vpl;
 typedef vector<si> vsi;
 typedef vector<sl> vsl;
 typedef vector<pld> vpld;
-typedef vector<vi> vvi;
-typedef vector<ll> vll;
 
 #define mp make_pair
 #define f first
@@ -114,11 +112,53 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define dbg(x...)
 #endif
 
-const int mxN = 2e5+5;
+const int mxN = 1e5+5;
 int n;
+vi adj1[mxN]; vi adj2[mxN];
+bool visited[mxN];
+
+void dfs1(int a){
+    visited[a] = true;
+    trav(b, adj1[a]){
+        if (!visited[b]) dfs1(b);
+    }
+}
+
+void dfs2(int a){
+    visited[a] = true;
+    trav(b, adj2[a]){
+        if (!visited[b]) dfs2(b);
+    }
+}
 
 void solve() {
+    cin >> n;
+    int m; cin >> m;
+    forr(i, 0, m){
+        int a, b; cin >> a >> b; a--; b--;
+        adj1[a].pb(b);
+        adj2[b].pb(a);
+    }
+    dfs1(0);
+    forr(i, 0, n){
+        if (!visited[i]){
+            cout << "NO" << endl;
+            cout << 1 << " " << i+1 << endl;
+            return;
+        }
+    }
 
+    fill(visited, visited+n, false);
+    dfs2(0);
+    forr(i, 0, n){
+        if (!visited[i]){
+            cout << "NO" << endl;
+            cout << i + 1 << " " << 1 << endl;
+            return;
+        }
+    }
+
+    cout << "YES" << endl;
 }
 
 int main() {
@@ -127,6 +167,6 @@ int main() {
 	// freopen("Codeforces.out", "w", stdout);
 
 	int t = 1;
-	// cin >> t;
+	// cin >> tc;
 	while (t--) solve();
 }

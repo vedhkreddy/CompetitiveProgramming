@@ -116,9 +116,52 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 
 const int mxN = 2e5+5;
 int n;
+bool pr[mxN];
+
+void sieve(int n){
+    bool prime[n+1];
+    memset(prime, true, sizeof(prime));
+    for(int p = 2; p * p <= n; p++){
+        if(prime[p] == true){
+            for (int i = p * p; i <= n; i += p)
+                prime[i] = false;
+        }
+    }
+    forr(p, 2, n+1){
+        if(prime[p] == true)pr[p] = true;
+    }
+}
 
 void solve() {
-
+    cin >> n;
+    fill(pr, pr+mxN, false);
+    sieve(n);
+    deque<int> res;
+    res.push_back(1);
+    bool ifthree = false;
+    vi v;
+    forr(i, 2, n+1){
+        if (size(res) % 2 == 0 && pr[i] == false){
+            res.push_front(i);
+        }
+        else if (size(res) % 2 == 1 && pr[i] == false) res.pb(i);
+        else if(pr[i] == true){
+            v.pb(i);
+        }
+    }
+    trav(i, v){
+        if (size(res) % 2 == 0){
+            res.push_front(i);
+        }
+        else{
+            res.pb(i);
+        }
+    }
+    //(res);
+    trav(i, res){
+        cout << i << " ";
+    }
+    cout << endl;
 }
 
 int main() {
@@ -127,6 +170,6 @@ int main() {
 	// freopen("Codeforces.out", "w", stdout);
 
 	int t = 1;
-	// cin >> t;
+	cin >> t;
 	while (t--) solve();
 }

@@ -118,6 +118,18 @@ const int mxN = 2e5+5;
 int n;
 
 void solve() {
+    int a, b; cin >> a >> b;
+    if (a != 1){
+        cout << "1" << endl;
+    }
+    else{
+        if (b == 2){
+            cout << "3" << endl;
+        }
+        else{
+            cout << "2" << endl;
+        }
+    }
 
 }
 
@@ -127,6 +139,6 @@ int main() {
 	// freopen("Codeforces.out", "w", stdout);
 
 	int t = 1;
-	// cin >> t;
+	cin >> t;
 	while (t--) solve();
 }

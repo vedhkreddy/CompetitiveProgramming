@@ -116,17 +116,58 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 
 const int mxN = 2e5+5;
 int n;
+vi divisors;
+vc res;
+
+void finddivisors(int n){
+    forr(i, 1, sqrt(n) + 1){
+        //dbg(i);
+        //dbg(n%i);
+        if (n % i == 0){
+            if (n/i == i){
+                divisors.pb(i);
+            }
+            else{
+                divisors.pb(i);
+                divisors.pb(n/i);
+            }
+        }
+    }
+}
 
 void solve() {
-
+    cin >> n;
+    divisors.clear();
+    res.clear();
+    finddivisors(n);
+    forr(i, 0, n){
+        res.pb('a');
+    }
+    char last = 'a';
+    int ascilast = 97;
+    //dbg(divisors);
+    trav(i, divisors){
+        for(int j = 0; j < n - i; j+= i){
+            if (res[j] == res[j+i]){
+                ascilast++;
+                last = char(ascilast);
+                res[j+i] = last;
+            }
+        }
+    }
+    for(char c : res){
+        cout << c;
+    }
+    cout << endl;
+    //dbg(divisors);
 }
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-	// freopen("Codeforces.in", "r", stdin);
+	//freopen("Codeforces.in", "r", stdin);
 	// freopen("Codeforces.out", "w", stdout);
 
 	int t = 1;
-	// cin >> t;
+	cin >> t;
 	while (t--) solve();
 }

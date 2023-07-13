@@ -114,17 +114,71 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define dbg(x...)
 #endif
 
-const int mxN = 2e5+5;
+const int mxN = 1e5+5;
 int n;
+int par[mxN];
+int sz[mxN];
+vvi wormholes;
+vpi connections;
+
+int get(int x) {return x == par[x] ? x : par[x] = get(par[x]);}
+void unite(int x, int y) {
+    x = get(x), y = get(y);
+    if (x == y) return;
+    if (sz[x] > sz[y]) swap(x,y);
+    par[x] = y;
+    sz[y] += sz[x];
+}
+void init() {
+    forr(i,0,n+1) {
+        sz[i] = 1;
+        par[i] = i;
+    }
+}
+
+bool cmp(vi a, vi b){
+    if (a[2] > b[2])
+        return true;
+    return false;
+}
 
 void solve() {
-
+    cin >> n;
+    int m; cin >> m;
+    init();
+    bool allcor = true;
+    forr(i, 0, n){
+        int a; cin >> a; a--;
+        if (a != i){
+            allcor = false;
+        }
+        connections.pb(mp(a, i));
+    }
+    if(allcor == true){
+        cout << "-1" << endl; 
+        return;
+    }
+    forr(i, 0, m){
+        int a, b; cin >> a >> b; a--; b--; int c; cin >> c;
+        wormholes.pb({a, b, c});
+    }
+    sort(all(wormholes), cmp);
+    int cur = 0;
+    forr(i, 0, n){
+        while(get(connections[i].first) != get(connections[i].second)){
+            unite(wormholes[cur][0], wormholes[cur][1]);
+            cur++;
+        }
+    }
+    //dbg(connections);
+    //dbg(wormholes);
+    cout << wormholes[cur-1][2];
 }
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-	// freopen("Codeforces.in", "r", stdin);
-	// freopen("Codeforces.out", "w", stdout);
+	freopen("wormsort.in", "r", stdin);
+	freopen("wormsort.out", "w", stdout);
 
 	int t = 1;
 	// cin >> t;

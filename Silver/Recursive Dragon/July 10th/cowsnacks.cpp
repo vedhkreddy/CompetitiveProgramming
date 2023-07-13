@@ -30,8 +30,6 @@ typedef vector<pl> vpl;
 typedef vector<si> vsi;
 typedef vector<sl> vsl;
 typedef vector<pld> vpld;
-typedef vector<vi> vvi;
-typedef vector<ll> vll;
 
 #define mp make_pair
 #define f first
@@ -114,16 +112,45 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define dbg(x...)
 #endif
 
-const int mxN = 2e5+5;
+const int mxN = 1e5+5;
 int n;
+int par[mxN];
+int sz[mxN];
+int components;
+
+int get(int x) {return x == par[x] ? x : par[x] = get(par[x]);}
+void unite(int x, int y) {
+    x = get(x), y = get(y);
+    if (x == y) return;
+    if (sz[x] > sz[y]) swap(x,y);
+    par[x] = y;
+    sz[y] += sz[x];
+}
+void init() {
+    forr(i,0,n+5) {
+        sz[i] = 1;
+        par[i] = i;
+    }
+}
 
 void solve() {
-
+    cin >> n;
+    components = n;
+    int k; cin >> k;   
+    init();
+    forr(i, 0, k){
+        int a, b; cin >> a >> b; a--; b--;
+        if (get(a) != get(b)){
+            components--;
+            unite(a, b);
+        }
+    }
+    cout << k - n + components << endl;
 }
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-	// freopen("Codeforces.in", "r", stdin);
+	//freopen("Codeforces.in", "r", stdin);
 	// freopen("Codeforces.out", "w", stdout);
 
 	int t = 1;
