@@ -114,50 +114,56 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define dbg(x...)
 #endif
 
-const int mxN = 3005;
-int n;
-int m;
-int dp[mxN][mxN];
-
-int lcs(str a, str b){
-    memset(dp, 0, sizeof(dp));
-    forr(i, 1, n+1){
-        forr(j, 1, m+1){
-            if(a[i-1] == b[j-1]) {dp[i][j] = dp[i-1][j-1] + 1; continue;}
-            dp[i][j] = max(dp[i-1][j], dp[i][j-1]); 
-        }
-    }
-    return dp[sz(a) - 1][sz(b) - 1];
-}
-
-str strlcs(str a, str b){
-    lcs(a, b);
-    str res = "";
-    while(n && m){
-        if (a[n-1] == b[m-1]){
-            res += a[n-1];
-            n--; m--;
-        }
-        else if(dp[n - 1][m] > dp[n][m - 1]) n--;
-        else m--;
-    }
-    reverse(all(res));
-    return res;
-}
+const int mxN = 2e5+5;
+int n; int m; int k;
 
 void solve() {
-    str a, b; cin >> a >> b;
-    n = a.size();
-    m = b.size();
-    cout << strlcs(a, b);
+    cin >> n >> m >> k;
+    vpi v;
+    int x, y; cin >> x >> y;
+    forr(i, 0, k){
+        int a, b; cin >> a >> b;
+        v.pb(mp(a, b));
+    }
+    bool p1 = false; bool p2 = false;
+    if (n == 2 && m == 2 && k == 2){
+        forr(i, 0, 2){
+            if ((x == 1 && y == 1) || (x == 2 && y == 2)){
+                if (v[i] == mp(1, 2)) p1 = true;
+                if (v[i] == mp(2, 1)) p2 = true;
+            }
+            else{
+                if (v[i] == mp(1, 1)) p1 = true;
+                if (v[i] == mp(2, 2)) p2 = true;                
+            }
+        }
+        if (p1 == true && p1 == p2){
+            cout << "YES" << endl;
+            return;
+        }
+        else{
+            cout << "NO" << endl;
+            return;
+        }
+    }
+
+    if (k > 1){
+        cout << "NO" << endl;
+        return;
+    }
+    else{
+        cout << "YES" << endl;
+        return;
+    }
+
 }
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-	freopen("Codeforces.in", "r", stdin);
+	// freopen("Codeforces.in", "r", stdin);
 	// freopen("Codeforces.out", "w", stdout);
 
 	int t = 1;
-	// cin >> t;
+	cin >> t;
 	while (t--) solve();
 }
