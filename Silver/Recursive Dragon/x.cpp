@@ -116,60 +116,42 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 
 const int mxN = 2e5+5;
 int n;
-int lastseen[mxN];
-int maxes[mxN][2];
-int occurences[mxN];
 
 void solve() {
-    forr(i, 0, mxN){
-        lastseen[i] = 0;
-        maxes[i][0] = 0; maxes[i][1] = 0;
-        occurences[i] = 0;
-    }
-    cin >> n;
-    int k; cin >> k;
-    vi all;
-    forr(i, 1, n+1){
-        int a; cin >> a;
-        occurences[a]++;
-        all.pb(a);
-        if (lastseen[a] == 0){
-            maxes[a][0] = i-1;
-        }
-        else{
-            int dist = i - lastseen[a] - 1;
-            if (maxes[i][0] < dist){
-                maxes[i][1] = maxes[i][0];
-                maxes[i][0] = dist;
-            }
-            else if (maxes[i][1] < dist){
-                maxes[i][1] = dist;
-            }
-        } 
-        lastseen[a] = i;
-    }
-    forr(i, 1, k+1){
-        int dist = n - lastseen[i];
-        if (maxes[i][0] < dist){
-            maxes[i][1] = maxes[i][0];
-            maxes[i][0] = dist;
-        }
-        else if (maxes[i][1] < dist){
-            maxes[i][1] = dist;
-        }
-    }
-    int minmax = INT32_MAX;
-    forr(i, 1, k+1){
-        if ((all[0] == i && all[n-1] == i && occurences[i] == 2) || (occurences[i] == 1 && (all[0] == i || all[n-1] == 1))){
-            ckmin(minmax, int(ceil(maxes[i][0]/2)));
-            cout <<  int(ceil(maxes[i][0]/2));
-            continue;
-        }
-        ckmin(maxes[i][1], maxes[i][0]/2);
-        ckmin(minmax, maxes[i][1]);
-    }
-    if (minmax < 0){
-        minmax = 0;
-    }
-    cout << minmax << endl;
-} 
+    int a[100010], b[100010];
+	cin >> n;
+	forr(i, 0, n){
+		cin >> a[i];
+		b[i] = a[i];
+	}
+	sort(b, b + n);
+	int i = 0;
+	int ans1 = 0, ans2 = 0;
+	while (i < n){
+		int j = i;
+		while (i + 1 < n && a[i + 1] < a[i])
+			i++;
+		if (i != j){
+			ans1 = j, ans2 = i;
+			break;
+		}
+		i++;
+	}
+	reverse(a + ans1, a + ans2 + 1);
+	forr(i, 0, n)
+		if (a[i] != b[i]){
+			cout << "no" << endl;
+			return;
+		}
+	cout << "yes" << endl << ans1 + 1 << " " << ans2 + 1 << endl;
+}
+
+int main() {
+	cin.tie(0)->sync_with_stdio(0);
+	// freopen("Codeforces.in", "r", stdin);
+	// freopen("Codeforces.out", "w", stdout);
+
+	int t = 1;
+	//cin >> t;
+	while (t--) solve();
+}

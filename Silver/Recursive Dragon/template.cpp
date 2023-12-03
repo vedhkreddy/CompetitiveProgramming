@@ -7,7 +7,7 @@ typedef long double ld;
 typedef double db;
 typedef string str;
 
-// change ld to db if neccesary
+// change ld to db if nexwccesary
 typedef pair<int,int> pi;
 typedef pair<ll,ll> pl;
 typedef pair<ld,ld> pld;

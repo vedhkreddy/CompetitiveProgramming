@@ -24,14 +24,11 @@ typedef vector<int> vi;
 typedef vector<ll> vl;
 typedef vector<ld> vld;
 typedef vector<str> vs;
-typedef vector<char> vc;
 typedef vector<pi> vpi;
 typedef vector<pl> vpl;
 typedef vector<si> vsi;
 typedef vector<sl> vsl;
 typedef vector<pld> vpld;
-typedef vector<vi> vvi;
-typedef vector<ll> vll;
 
 #define mp make_pair
 #define f first
@@ -48,7 +45,6 @@ typedef vector<ll> vll;
 #define eb emplace_back
 #define lb lower_bound
 #define ub upper_bound
-#define endl "\n"
 
 #define forr(i,a,b) for (int i = (int)(a); i < (int)(b); i++)
 #define ford(i,a,b) for (int i = (int)(a)-1; i >= (int)(b); i--)
@@ -66,14 +62,6 @@ int fstTrue(function<bool(int)> f, int lo, int hi) {
 	}
 	return lo;
 }
-int lstTrue(function<bool(int)> f, int lo, int hi) {
-    --lo; assert(lo <= hi);
-    while(lo < hi){
-        int mid = lo + (hi - lo + 1) / 2;
-        f(mid) ? lo = mid : hi = mid - 1;
-    }
-    return lo;
-}
 
 const ll MOD = 1e9+7;
 const int dx[8] = {1, 0, -1, 0, 1, 1, -1, -1}, dy[8] = {0, 1, 0, -1, -1, 1, -1, 1};
@@ -87,7 +75,7 @@ mt19937 rng((uint32_t)chrono::steady_clock::now().time_since_epoch().count());
 uniform_int_distribution<long long unsigned> distribution(1,1000000);
 
 void __print(int x) {cerr << x;}
-void __print(long x) {cerr << x;}   
+void __print(long x) {cerr << x;}
 void __print(long long x) {cerr << x;}
 void __print(unsigned x) {cerr << x;}
 void __print(unsigned long x) {cerr << x;}
@@ -116,60 +104,64 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 
 const int mxN = 2e5+5;
 int n;
-int lastseen[mxN];
-int maxes[mxN][2];
-int occurences[mxN];
 
 void solve() {
-    forr(i, 0, mxN){
-        lastseen[i] = 0;
-        maxes[i][0] = 0; maxes[i][1] = 0;
-        occurences[i] = 0;
-    }
     cin >> n;
-    int k; cin >> k;
-    vi all;
-    forr(i, 1, n+1){
-        int a; cin >> a;
-        occurences[a]++;
-        all.pb(a);
-        if (lastseen[a] == 0){
-            maxes[a][0] = i-1;
+    vs v(n);
+    cin.get();
+    forr(i, 0, n){
+        getline(cin, v[i]);
+    }
+    string qp;
+    string ans;
+    forr(i, 0, n){
+        if (v[i]=="99 bottles of beer on the wall, 99 bottles of beer."&&v[i+1]=="Take one down and pass it around, 98 bottles of beer on the wall."&&v[i+2]=="98 bottles of beer on the wall, 98 bottles of beer."&&v[i+3]=="Take one down and pass it around, 97 bottles of beer on the wall."&&v[i+4]=="97 bottles of beer on the wall, 97 bottles of beer."&&v[i+5]=="Take one down and pass it around, 96 bottles of beer on the wall."){
+            ans += '9';
+            i += 6;
+        }
+        else if(v[i] == "Hello, world!"){
+            ans += 'H';
         }
         else{
-            int dist = i - lastseen[a] - 1;
-            if (maxes[i][0] < dist){
-                maxes[i][1] = maxes[i][0];
-                maxes[i][0] = dist;
+            if (qp == ""){
+                qp = v[i];
             }
-            else if (maxes[i][1] < dist){
-                maxes[i][1] = dist;
+            else if (qp != "" && v[i] != qp){
+                cout << "IMPOSSIBLE" << endl;
+                return;
             }
-        } 
-        lastseen[a] = i;
-    }
-    forr(i, 1, k+1){
-        int dist = n - lastseen[i];
-        if (maxes[i][0] < dist){
-            maxes[i][1] = maxes[i][0];
-            maxes[i][0] = dist;
-        }
-        else if (maxes[i][1] < dist){
-            maxes[i][1] = dist;
         }
     }
-    int minmax = INT32_MAX;
-    forr(i, 1, k+1){
-        if ((all[0] == i && all[n-1] == i && occurences[i] == 2) || (occurences[i] == 1 && (all[0] == i || all[n-1] == 1))){
-            ckmin(minmax, int(ceil(maxes[i][0]/2)));
-            cout <<  int(ceil(maxes[i][0]/2));
-            continue;
+    vs v1;
+    forr(i, 0, qp.size()){
+        if (qp[i] == 'H'){
+            v1.pb("Hello, world!");
         }
-        ckmin(maxes[i][1], maxes[i][0]/2);
-        ckmin(minmax, maxes[i][1]);
+        else if (qp[i] == '9'){
+            v1.pb("99 bottles of beer on the wall, 99 bottles of beer.");v1.pb("Take one down and pass it around, 98 bottles of beer on the wall.");v1.pb("98 bottles of beer on the wall, 98 bottles of beer.");v1.pb("Take one down and pass it around, 97 bottles of beer on the wall.");v1.pb("97 bottles of beer on the wall, 97 bottles of beer.");v1.pb("Take one down and pass it around, 96 bottles of beer on the wall.");
+        }
+        else if (qp[i] == 'Q'){
+            v1.pb(qp);
+        }
+        else if (qp[i] == '+') continue;
+        else{
+            cout << "IMPOSSIBLE" << endl;
+            return;
+        }
     }
-    if (minmax < 0){
-        minmax = 0;
-    }
-    cout << minmax << endl;
-} 
+    //dbg(v1);
+    if (v1 == v) {cout << qp << endl; return;}
+    else if (v1 != v && qp != ""){cout << "IMPOSSIBLE" << endl; return;}
+    cout << ans << endl;;
+}
+
+int main() {
+	cin.tie(0)->sync_with_stdio(0);
+	//freopen("Codeforces.in", "r", stdin);
+	// freopen("Codeforces.out", "w", stdout);
+
+	int tc = 1;
+	cin >> tc;
+    
+	while (tc--) solve();
+}

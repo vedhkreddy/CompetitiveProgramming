@@ -5,6 +5,27 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "TrafficLight",
+            "request": "launch",
+            "mainClass": "TrafficLight",
+            "projectName": "Silver_834cdf63"
+        },
+        {
+            "type": "java",
+            "name": "errors",
+            "request": "launch",
+            "mainClass": "errors",
+            "projectName": "Silver_834cdf63"
+        },
+        {
+            "type": "java",
+            "name": "HelloVedh",
+            "request": "launch",
+            "mainClass": "HelloVedh",
+            "projectName": "Silver_834cdf63"
+        },
+        {
             "name": "g++-11 - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",

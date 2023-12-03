@@ -3,13 +3,11 @@ using namespace std;
 typedef long long ll; 
 typedef pair <int ,int> pii ; 
 const int MAXN = 2e5 + 5; 
-const int MOD = 998244353 ; 
-int tc , n , m ,k ; 
+int t , n , m ,k ; 
  
 int main (){
-	ios::sync_with_stdio(false); cin.tie(0) ;cout.tie(0) ;
-	cin >> tc ; 
-	while (tc--){
+	cin >> t; 
+	while (t--){
 		cin >> n >> m >> k ; 
 		int h = k ,v = n * m / 2 - k ; 
 		if (n & 1){
