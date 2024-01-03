@@ -1,0 +1,10 @@
+read in input
+read in the sequences into a vector
+create a vector with all of them in order
+
+create adjacency list
+remember to add in edges backwards
+
+check in linear time for everything
+
+at the same time, create a way of knowing which nums cannnot be assigned to both, subtract that from the main, output answer

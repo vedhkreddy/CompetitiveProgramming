@@ -4,7 +4,6 @@
 using ll = long long;
  
 using namespace std;
- 
 int main() {
     ll q;
     cin >> q;

@@ -1,12 +1,14 @@
 
 #include <bits/stdc++.h>
+#define all(a) (a).begin(), (a).end()
+#define sz(a) (int)(a).size()
+#define pb push_back
  
 using namespace std;
  
 typedef long long ll;
 typedef long double ld;
 typedef pair<int, int> pii;
-mt19937 rr(random_device{}());
  
 const int INF = 1e9;
  
