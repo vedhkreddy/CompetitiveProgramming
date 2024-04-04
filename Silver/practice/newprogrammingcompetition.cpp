@@ -124,6 +124,7 @@ int res(int x, int done){
     int max = -1;
     int tot = 0;
     int maxt;
+    //recalculation
     for(int i : adj[x]){
         tot += sub[i];
         if(sub[i] > max){
@@ -140,7 +141,9 @@ int res(int x, int done){
         int plus = tot - sub[maxt];
         int newdone = 0;
         ckmax(newdone, done + plus - 1);
+        //-1 because we dont count the current node (paired immediately)
         return plus + res(maxt, newdone);
+
     } 
 }
 

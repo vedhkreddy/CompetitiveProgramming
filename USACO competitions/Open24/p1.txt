@@ -1,0 +1,18 @@
+read in input
+add first k to a priority queue
+also add to a time:grader vector map
+    the time will be the end time
+while true
+    keep popping from pq
+        keep trakc of last and make sure to ignore duplicates
+        check which graders get open (using the map)
+        iterate through each grader
+            if there is a next cow 
+                update map (curtime + nexttime : grader)
+                push the finaltime as well
+            if not
+                add edge between every grader in the current thingy
+                break
+
+
+

@@ -17,7 +17,6 @@ int solve(){
     }
     
     set<int> ress;
-    //cout << a[0] << a[k-1];
     //adj[a[0]].pb(a[k-1]);
     int res = 0;
 

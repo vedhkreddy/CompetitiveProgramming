@@ -116,7 +116,7 @@ void solve() {
         int cost = 0;
         priority_queue<int> p;
         forr(j, 0, n){
-            p.push(make_pair(abs()))
+            //p.push(make_pair(abs()))
         }
     }
     //generate new permutations

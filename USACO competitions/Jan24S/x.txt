@@ -1,0 +1,5 @@
+lets develop an o(n) algorithm to solve this quickly
+
+
+the first thing we know is that some zeros need to guarantee specific conditions that arent
+

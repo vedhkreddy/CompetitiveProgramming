@@ -1,0 +1,22 @@
+{
+    "files.associations": {
+        "bitset": "cpp",
+        "complex": "cpp",
+        "ctime": "cpp",
+        "deque": "cpp",
+        "exception": "cpp",
+        "functional": "cpp",
+        "iterator": "cpp",
+        "fstream": "cpp",
+        "ios": "cpp",
+        "iosfwd": "cpp",
+        "istream": "cpp",
+        "limits": "cpp",
+        "list": "cpp",
+        "locale": "cpp",
+        "map": "cpp",
+        "cwchar": "cpp",
+        "forward_list": "cpp",
+        "*.tcc": "cpp"
+    }
+}
