@@ -44,7 +44,78 @@ void solve(){
     int alice = true;
     int aliceres = 0; int bobres = 0;
     for(int i = 0; i < m; i++){
+
         char c; int k; cin >> c; cin >> k;
+        if (c == 'U'){
+            while(true){
+                if (pqMinY.size() == 0){
+                    break;
+                }
+                pair<int, int> y = pqMinY.top();
+                if (done[y] == 1){
+                    pqMinY.pop(); continue;
+                }
+                else if (y.second < basey + k){
+                    pqMinY.pop();
+                    done[y] = 1;
+                    if (alice == true){
+                        aliceres++;
+                    }
+                    else{
+                        bobres++;
+                    }
+                    basey += k;
+                    continue;
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        if (c == 'D'){
+            while(true){
+                pair<int, int> y = pqMaxY.top();
+                if (done[y] == 1){
+                    pqMaxY.pop(); continue;
+                }
+                else if (y.second < a + k){
+                    pqMaxY.pop();
+                    done[y] = 1;
+                    if (alice == true){
+                        aliceres++;
+                    }
+                    else{
+                        bobres++;
+                    }
+                    continue;
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        if (c == 'U'){
+            while(true){
+                pair<int, int> y = pqMinY.top();
+                if (done[y] == 1){
+                    pqMinY.pop(); continue;
+                }
+                else if (y.second < basey + k){
+                    pqMinY.pop();
+                    done[y] = 1;
+                    if (alice == true){
+                        aliceres++;
+                    }
+                    else{
+                        bobres++;
+                    }
+                    continue;
+                }
+                else{
+                    break;
+                }
+            }
+        }
         if (c == 'U'){
             while(true){
                 pair<int, int> y = pqMinY.top();
