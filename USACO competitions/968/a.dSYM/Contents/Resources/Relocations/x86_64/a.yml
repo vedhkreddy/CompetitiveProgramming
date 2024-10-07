@@ -1,0 +1,10 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     a
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: __Z5solvev, symObjAddr: 0x0, symBinAddr: 0x100000ED0, symSize: 0x60 }
+  - { offsetInCU: 0x3F, offset: 0x3F, size: 0x8, addend: 0x0, symName: _n, symObjAddr: 0x15F0, symBinAddr: 0x100002000, symSize: 0x0 }
+  - { offsetInCU: 0x5B, offset: 0x5B, size: 0x8, addend: 0x0, symName: _s, symObjAddr: 0x1600, symBinAddr: 0x100002010, symSize: 0x0 }
+  - { offsetInCU: 0x81A, offset: 0x81A, size: 0x8, addend: 0x0, symName: __Z5solvev, symObjAddr: 0x0, symBinAddr: 0x100000ED0, symSize: 0x60 }
+  - { offsetInCU: 0x833, offset: 0x833, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x60, symBinAddr: 0x100000F30, symSize: 0x4E }
+...
