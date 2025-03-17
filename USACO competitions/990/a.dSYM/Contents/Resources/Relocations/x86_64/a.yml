@@ -1,0 +1,13 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     a
+relocations:
+  - { offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100000CD0, symSize: 0x110 }
+  - { offset: 0x36C7, size: 0x8, addend: 0x0, symName: __ZNSt3__16__math4sqrtB8ne180100IiLi0EEEdT_, symObjAddr: 0x110, symBinAddr: 0x100000DE0, symSize: 0x20 }
+  - { offset: 0x43A5, size: 0x8, addend: 0x0, symName: __ZNSt3__14endlB8ne180100IcNS_11char_traitsIcEEEERNS_13basic_ostreamIT_T0_EES7_, symObjAddr: 0x150, symBinAddr: 0x100000E20, symSize: 0x50 }
+  - { offset: 0x43E5, size: 0x8, addend: 0x0, symName: __ZNSt3__19use_facetB8ne180100INS_5ctypeIcEEEERKT_RKNS_6localeE, symObjAddr: 0x220, symBinAddr: 0x100000EF0, symSize: 0x30 }
+  - { offset: 0x583E, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100000CD0, symSize: 0x110 }
+  - { offset: 0x59CB, size: 0x8, addend: 0x0, symName: __ZNSt3__113basic_ostreamIcNS_11char_traitsIcEEElsB8ne180100EPFRS3_S4_E, symObjAddr: 0x130, symBinAddr: 0x100000E00, symSize: 0x20 }
+  - { offset: 0x59FD, size: 0x8, addend: 0x0, symName: __ZNKSt3__19basic_iosIcNS_11char_traitsIcEEE5widenB8ne180100Ec, symObjAddr: 0x1A0, symBinAddr: 0x100000E70, symSize: 0x80 }
+  - { offset: 0x5A74, size: 0x8, addend: 0x0, symName: __ZNKSt3__15ctypeIcE5widenB8ne180100Ec, symObjAddr: 0x250, symBinAddr: 0x100000F20, symSize: 0x2B }
+...

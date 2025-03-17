@@ -1,0 +1,8 @@
+
+read in input
+
+function mark good or not:
+    iterate from all of the edges
+    if question mark, start floodfill, maintain visited
+    if not a question mark, make sure it actually leads OUT of the page, if it does, then floodfill in REVERSE order
+    keep the same visited array for the initial marking good or not
