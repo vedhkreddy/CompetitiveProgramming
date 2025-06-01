@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "map": "cpp",
+        "unordered_map": "cpp",
+        "set": "cpp",
+        "random": "cpp",
+        "iostream": "cpp",
+        "queue": "cpp",
+        "ios": "cpp"
+    }
+}

@@ -1,0 +1,8 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     DominoPiling
+relocations:
+  - { offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100000F30, symSize: 0x50 }
+  - { offset: 0x3A, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100000F30, symSize: 0x50 }
+  - { offset: 0x7F, size: 0x8, addend: 0x0, symName: __ZNSt3__16__math5floorB8ne180100IiLi0EEEdT_, symObjAddr: 0x50, symBinAddr: 0x100000F80, symSize: 0x14 }
+...
